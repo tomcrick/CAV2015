@@ -14,10 +14,10 @@
 \institute{Department of Computing \& Information Systems\\Cardiff Metropolitan University, UK\\
 \email{tcrick@cardiffmet.ac.uk}
 \and
-Microsoft Research, Cambridge, UK\\
+Microsoft Research Cambridge, UK\\
 \email{samin.ishtiaq@microsoft.com}
 \and
-University of Cambridge, UK\\
+MRC Cancer Unit, University of Cambridge, UK\\
 \email{bh418@mrc-cu.cam.ac.uk}
 }
 
@@ -32,14 +32,76 @@ University of Cambridge, UK\\
 \maketitle
 
 \begin{abstract}
-Abstract here...
+We propose a model for promoting and embedding reproducibility into CAV.
 \end{abstract}
 
 \section{Introduction}\label{intro}
-We're proposing stuff...\cite{crick-et-al_wssspe2,crick-et-al_recomp2014}.
+We're proposing
+stuff, based upon previous work~\cite{crick-et-al_wssspe2,crick-et-al_recomp2014}.
+
+Cite: Recomputation Manifesto~\cite{gent:2013}, 10 Simple Rules for Reproducible
+Research~\cite{sandve-et-al:2013}, Stodden~\cite{stodden-et-al:2013}, etc.
+
+{\textbf{IDEA: pick one of Samin's CAV papers (BMA?) and run it through the process
+and see what happens.}}
+
+% http://2014.splashcon.org/track/splash2014-artifacts#About
+From SPLASH: {\emph{OOPSLA Artifacts: The Artifact Evaluation Committee has been formed
+to assess how well paper authors prepare artifacts in support of such
+future researchers. Roughly, authors of papers who wish to participate
+are invited to submit an artifact that supports the conclusions of the
+paper. The Artifact Evaluation Committee will read the paper and
+explore the artifact to give the authors third-party feedback about
+how well the artifact supports the paper and how easy it is, in the
+committee’s opinion, for future researchers to use the artifact. This
+submission is voluntary and will not influence the final decision
+regarding the papers. Papers that go through the Artifact Evaluation
+process successfully receive a seal of approval printed on the first
+page of the paper in the OOPSLA proceedings.}}
+
+Other examples: ACM TRUST~\cite{fursin+dubach:2014}; using proofs and
+Coq e.g. POPL/PLDI/ICFP.
+
+% Q: do we need to define artefact? different from model, etc, also
+% domain terminology e.g. CS vs. physics.
+
+Big question for different research communities: How to kick this off?
+Year 0: you can offer it as an optional extra, or...do it for everyone
+and then present the results next year to show the issues
+(carrot/stick?). There is a genuine time/research cost? Yes, but this
+is the key: it has to be done and it thus part of effecting cultural
+change within a community...
+
+\begin{enumerate}
+\item Call for papers: clearly advertised and high profile in conf cfp
+  -- this is a new thing and a change in how we're doing stuff.
+\item The game is changing, but this is (currently) extra to the
+  normal reviewing process: 
+e.g. {\emph{This submission is voluntary and will not influence the final decision
+regarding the papers.}} -- independent of the scientific merit of the
+paper, the results will be verified 
+\item (prize? as well as ranked ordering at end of conf, listed in
+  proceedings, badge, seal of approval, etc)
+\item explicit criteria for authors? but essentially: {\emph{make this
+      as easy as possible for us to evaluate/execute your artefact!}}
+\item when papers are submitted, they have to nominate whether they
+  want their paper to go through artefact review
+\item (then you need artefact reviewers, probably taken from the pool of
+  reviewers, but will need specialism)
+\item specify review criteria, but essentially: {\emph{can I evaluate/execute this
+  artefact and get the same results that are presented in the paper?}}
+\item reporting: traffic lights and ranked list
+\item at the start, this is not complusory, but this will change over a period of
+time -- effecting cultural change and this would then become a
+necessary condition.
+\item Repo/database or previous artefacts, which would build over the
+  years to give exemplars and comparisons.
+\end{enumerate}
+
+How to effectively ``generalise'' for reuse and then cascading to other communities?
 
 \section{Conclusions}\label{concl}
-We've done stuff...
+We've done this for CAV...
 
 
 
