@@ -46,15 +46,29 @@ model for promoting and embedding reproducibility into CAV.
 \end{abstract}
 
 \section{Introduction}\label{intro}
-We're proposing
-stuff, based upon previous work~\cite{crick-et-al_wssspe2,crick-et-al_recomp2014}.
+The reproducibility of scientific discovery has come into sharp focus over the past few years.
+Following a revoltion in the sharing and dissemination of published papers (\emph{Open Access})
+and the subsequent discussions relating to the sharing of protocols and materials (\emph{Open
+Science}) the ability of a researcher to take published data and reimplement the described
+workflow has been under scrutiny~\cite{gent:2013,sandve-et-al:2013}. This has been further supported by wider cultural issues in
+scientific community, where irreproducible, and frequently high profile results 
+are increasingly being identified and retracted from the literature~\cite{retraction_watch}.
+We have previously documented some of the technical and cultural barriers to reproducing 
+work across multiple disciplines in the computational sciences, both in terms of the sharing
+of algorithms~\cite{crick-et-al_recomp2014} and benchmark sets~\cite{crick-et-al_wssspe2}. 
+The impact of irreproducibility is however broadly felt across multiple disciplines, with 
+well discussed issues psychology~\cite{chambers-et-al:2014} and others.
 
-Cite: Recomputation Manifesto~\cite{gent:2013}, 10 Simple Rules for Reproducible
-Research~\cite{sandve-et-al:2013}, Stodden~\cite{stodden-et-al:2013},
-changes to dissemination in other fields e.g. psychology~\cite{chambers-et-al:2014}.
+Reproducibility has now been explicitly acknowledged as a desirable quality in a number of 
+different conferences, including CAV and TACAS. Some conferences explcitly note that 
+the provision of \emph{artefacts} (an accessible tool for reproducing results) is desirable
+but does not change the ultimate outcome of the review e.g. OOPSLA. Several biological journals
+(e.g. Bioinformatics, PLoS Computational Biology) explicitly require that source code is
+made available under an open source license, or through a web interface. 
 
-{\textbf{IDEA: pick one of Samin's CAV papers (BMA?) and run it through the process
-and see what happens.}}
+%Cite: Recomputation Manifesto~\cite{gent:2013}, 10 Simple Rules for Reproducible
+%Research~\cite{sandve-et-al:2013}, Stodden~\cite{stodden-et-al:2013},
+%changes to dissemination in other fields e.g. psychology~\cite{chambers-et-al:2014}.
 
 % http://2014.splashcon.org/track/splash2014-artifacts#About
 From SPLASH: {\emph{OOPSLA Artifacts: The Artifact Evaluation Committee has been formed
@@ -76,12 +90,36 @@ Coq e.g. POPL/PLDI/ICFP.
 % Q: do we need to define artefact? different from model, etc, also
 % domain terminology e.g. CS vs. physics.
 
+However, whilst provision of a single implementation or the current source
+code may not be sufficient to reproduce computational discoveries satisfactorily.
+As discussed previously, external dependencies may change the behaviour, or 
+in the case of an incompatible upgrade, prevent compilation. Other factors include
+... These points of failure could be partially addressed by going beyond the sharing
+of source code and benchmarks, and sharing complete systems which build code and 
+test the software in question. Such a system could be run centrally, independent of 
+the researchers, and new papers could be associated with a submission of code and
+a set of benchmarks. This would ensure that the code compiles and runs as described,
+but would also serve as a repository of artefacts, allowing future researchers,
+who are perhaps suffering under a burden of code which does not compile or models
+which do not behave, a trusted example of a working implementation.
+
+Following the proposal of such a system, the question becomes: how do we achieve 
+this? Such a service may appear trivial, given the large numbers of tools which
+could potentially support the service. There remain however key questions that
+can only be answered on implementation. Furthermore, after such a service has been
+implemented, how do we ensure it is \emph{useful} and \emph{usable} for researchers.
+
 Big question for different research communities: How to kick this off?
 Year 0: you can offer it as an optional extra, or...do it for everyone
 and then present the results next year to show the issues
 (carrot/stick?). There is a genuine time/research cost? Yes, but this
 is the key: it has to be done and it thus part of effecting cultural
 change within a community...
+
+
+{\textbf{IDEA: pick one of Samin's CAV papers (BMA?) and run it through the process
+and see what happens.}}
+
 
 \begin{enumerate}
 \item Call for papers: clearly advertised and high profile in conf cfp
