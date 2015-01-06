@@ -240,6 +240,44 @@ to our familiarity with the tool, and to highlight historical examples where a
 reproducibility service would have supported both code development and algorithm
 discovery.
 
+Suggested things to discuss here- the proposed benefits of such a service:
+
+Local hacks to publish are not communicated preventing reuse
+(specific commands required to compile and publish the code, 
+relating to 64- and 32- bit capabilities, were not distributed
+and lost when a team member left)
+Service would- highlight when a codebase could not be compiled or run
+
+Effects of rounding mechanisms in the algorithm implementation
+(swapping floors and rounds broke some things subtly)
+Service would- highlight these changes in behaviour clearly
+
+Impact of implementing "biological" intuition in the tool
+(changing the default target function of nodes with no inputs, also
+breaking things subtly)
+Service would- highlight the problems created
+
+Modelling reveals untested issues: range conversion
+(no original benchmarks had range conversion- new benchmarks did
+and showed unexpected behaviour, including a mismatch between symbolic
+and explicit implementations of range conversion)
+Service would- allow external users to add new benchmarks, which would make it
+easier to catch these issues
+
+Modelling reveals algorithmic weakness: timed switch models 
+(a new class of models was discovered which forced the tool to search 
+for large cycles explicitly to prove stability)
+Service would- allow these new models to have been identified earlier
+by highlighting that proofs of stability consistently timed out
+Service would- make it easier to prove stability multiple ways (e.g.
+through the LTL checker of CAV13)
+Service would- show the improvement in speed resulting from the introduction
+of the new algorithm
+
+Worked example of how issues could be highlighted and found over time: perhaps
+another figure? linking code changes to discoveries could be drawn as a timeline. The 
+proposed output of the hypothetical service could be indicated alongside it, 
+demonstrating how the service would have supported the work.
 
 \begin{enumerate}
 \item Call for papers: clearly advertised and high profile in conf cfp
