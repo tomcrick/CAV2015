@@ -110,13 +110,44 @@ CAV paper by the authors. Finally, we highlight key implementation issues relati
 security and general applicability which will need mitigating or solving prior to universal
 uptake.
 
+\section{A specification for reproducible computational science}\label{spec}
 
+A service for reproducibility is intended to play three important roles. It should:
+\begin{enumerate}
+	\item Demonstrate that a piece of code can be compiled, run and behaves as described,
+		without manual intervention from the developer.
+	\item Store and link specific artefacts and their with different publications
+		or other publically accessible datasets.
+	\item Allow new benchmarks to be added, by users other than the developer, to 
+		widen the testing and identify potential bugs.
+\end{enumerate}
+ 
+Furthermore, we feel that such a service must require the minimum developer intervention.
+This serves multiple purposes- through automation for example, the service can be enabled to compile 
+new code and test new benchmarks trivially. This also forces the developer to make local
+workarounds or hacks publically viewable. As such, this requires the developer to make the 
+project dependencies clearly available, and enables future changes in the dependencies 
+(such as a library update) to be tested automatically too. 
 
+Finally, the service must fit easily into the developers workflow. As noted below~\ref{rollout}
+we expect that there will be some costs to the users in terms of the time required
+to ensure that the code compiles and runs on the service. To minimise this, the service
+needs to connect to standard code repositories, automatically detecting and responding to
+new versions of the code and updates to dependencies, running tests for every new code commit.
 
-\section{Introducing reproducibility testing to the community}
+To address these needs we propose that the service should follow the scheme given in figure~\ref{schematic}. Two classes of user are identified 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Workflow}
+	\caption{\label{schematic} Proposed service workflow.}
+\end{figure}
+	
+
+\section{Introducing reproducibility testing to the community}\label{rollout}
 
 Following the proposal of such a system, the question becomes: how do we achieve 
-this? Such a service may appear trivial, given the large numbers of tools which
+widespread uptake, or even standardisation? Such a service may appear trivial, given the large numbers of tools which
 could potentially support the service. There remain however key questions that
 can only be answered on implementation. Furthermore, after such a service has been
 implemented, how do we ensure it is \emph{useful} and \emph{usable} for researchers.
