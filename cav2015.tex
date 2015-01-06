@@ -4,6 +4,7 @@
 \usepackage[british]{babel}
 \usepackage{url}
 \usepackage[pdftex,colorlinks=true]{hyperref}
+\usepackage{graphicx}
 %\fussy
 
 
@@ -135,14 +136,53 @@ to ensure that the code compiles and runs on the service. To minimise this, the 
 needs to connect to standard code repositories, automatically detecting and responding to
 new versions of the code and updates to dependencies, running tests for every new code commit.
 
-To address these needs we propose that the service should follow the scheme given in figure~\ref{schematic}. Two classes of user are identified 
-
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.5\textwidth]{Workflow}
-	\caption{\label{schematic} Proposed service workflow.}
+	\includegraphics[width=0.9\textwidth]{Workflow}
+	\caption{Proposed service workflow.}
+	\label{schematic}
 \end{figure}
 	
+To address these needs we propose that the service should follow the scheme given in 
+figure~\ref{schematic}. Two classes of user are defined; developers, who generate code, 
+and modellers, who generate new benchmarks. An individual might in practice play either
+or both of these roles; here the roles serve to define ways in which people interact with
+the system. A developer writes new code, which is periodically pushed to a repository 
+such as github. Through integration with the repository, the server responds to new 
+code by undergoing a process of pulling the code from the repository, downloading 
+required dependencies, and compiling the code. If this stage fails, the developer is 
+informed and the workflow ends. If the code is successfully compiled, two stages of 
+testing are performed. The first stage (labelled "test" in figure~\ref{schematic}), involves
+running a series of basic tests defined by the developer. This is intended as a sanity check 
+to ensure that basic features of the code have not been broken by the updated code, and 
+failure to pass these tests is reported and ends the work flow. If this completes succesfully,
+the second stage (labelled "benchmark" in figure~\ref{schematic}) a series of models are 
+tested for a known property, and the results recorded. These results can then be stored
+in a database, with a note of the commit ID, and presented through a web interface for 
+future analysis. 
+
+In contrast to the developer role, a modeller supplies benchmarks for a piece of code 
+to test. These do not require that the latest version of the code is recompiled, but 
+on submission the models are tested and added to the local repository of models for
+analysis. After a model is submitted, the model is tested on every new piece of code
+pushed to the server and the changes in the behaviour can be noted and linked to 
+specific code commits. Whilst the developers role has a transparent value (in 
+providing an implementation of an algorithm), the value of the modeller may be less 
+immediately clear. The modeller submits a broad range of tests which may highlight
+material flaws (i.e. bugs) in the implementation, or the algorithm. More than this
+however, the modeller may generate models which identify weaknesses of either an
+algorithm or an implementation. One example from the authors experience is the 
+series of models with "timed-switches" described in \cite{cav14}; this is discussed 
+in greater depth below in~\ref{example}.
+
+Finally, dependencies for a given implementation need explicit testing. Due to the
+highly variable and sometimes complex nature of dependencies, we see this as an
+optional part of the workflow, as developers may chose to supply dependencies as
+binary files in the code compilation process. For completeness however we note that 
+such a system could also respond to updates in external dependencies by triggering 
+compilation and testing in the same manner as defined for a new code commit. This 
+would aid developers in identifying code breaking changes induced by third parties.
+
 
 \section{Introducing reproducibility testing to the community}\label{rollout}
 
@@ -184,6 +224,8 @@ assess reproducibility in the review process.
 
 This plan balances competing needs within the community, and would reduce the activation
 energy for uptake by gradually introducing it to authors.
+
+\section{The BioModelAnalyzer as a worked example}\label{example}
 
 {\textbf{IDEA: pick one of Samin's CAV papers (BMA?) and run it through the process
 and see what happens.}}
