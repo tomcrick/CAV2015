@@ -172,7 +172,7 @@ immediately clear. The modeller submits a broad range of tests which may highlig
 material flaws (i.e. bugs) in the implementation, or the algorithm. More than this
 however, the modeller may generate models which identify weaknesses of either an
 algorithm or an implementation. One example from the authors experience is the 
-series of models with "timed-switches" described in \cite{cav14}; this is discussed 
+series of models with "timed-switches" described in \cite{cook2014}; this is discussed 
 in greater depth below in~\ref{example}.
 
 Finally, dependencies for a given implementation need explicit testing. Due to the
@@ -230,6 +230,16 @@ energy for uptake by gradually introducing it to authors.
 {\textbf{IDEA: pick one of Samin's CAV papers (BMA?) and run it through the process
 and see what happens.}}
 
+The BioModelAnalyzer is a tool for the development and analysis of a specific 
+class of formal models for biology~\cite{benque2012,cook2010,cook2014}. Models 
+are built by biologists in a web browser and are explored at present by a combination 
+of simulation and model checking. The tool specifically allows users to test for 
+model \emph{stability}; that is, a bespoke algorithm proves that for all initial 
+states a model always ends in a single fixpoint. We have choosen this example due
+to our familiarity with the tool, and to highlight historical examples where a 
+reproducibility service would have supported both code development and algorithm
+discovery.
+
 
 \begin{enumerate}
 \item Call for papers: clearly advertised and high profile in conf cfp
@@ -257,7 +267,13 @@ necessary condition.
   years to give exemplars and comparisons.
 \end{enumerate}
 
+\section{Known unknowns: issues for a reproducibility service}\label{issues} 
+
 How to effectively ``generalise'' for reuse and then cascading to other communities?
+
+How best to secure a service which compiles and runs arbitrary code on arbitrary inputs?
+
+How to estimate raw performance on the cloud?
 
 \section{Conclusions}\label{concl}
 We've done this for CAV...
