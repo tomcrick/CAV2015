@@ -8,18 +8,18 @@
 %\fussy
 
 
-\title{A Model of Reproducibility for CAV}
+\title{A Reproducibility Model for CAV}
 
-\author{Tom Crick\inst{1} \and Samin Ishtiaq\inst{2} \and Benjamin A. Hall\inst{3}}
+\author{Tom Crick\inst{1} \and Benjamin A. Hall\inst{2} \and Samin Ishtiaq\inst{3}}
 
 \institute{Department of Computing \& Information Systems\\Cardiff Metropolitan University, UK\\
 \email{tcrick@cardiffmet.ac.uk}
 \and
-Microsoft Research Cambridge, UK\\
-\email{samin.ishtiaq@microsoft.com}
-\and
 MRC Cancer Unit, University of Cambridge, UK\\
 \email{bh418@mrc-cu.cam.ac.uk}
+\and
+Microsoft Research Cambridge, UK\\
+\email{samin.ishtiaq@microsoft.com}
 }
 
 \raggedbottom
@@ -33,46 +33,68 @@ MRC Cancer Unit, University of Cambridge, UK\\
 \maketitle
 
 \begin{abstract}
-Reliably reproducing published scientific discoveries has been acknowledged as a barrier to 
-scientific progress. Even when pubhlished results reflect the authors interpretation perfectly,
-novel implementation of published algorithms, and their subsequent benchmarking leaves 
-substantial room for error. However, whilst this phenomena has been recognised and documented for some
-time, there remains only a small subset of software available to support the specific 
-needs of the research community (i.e. beyond generic tools such as git). Here we propose a 
-concrete platform for reproducibility, based on a prototype which supports previously published 
-work by some of the authors. The aim of this platform is to automate the build, unit testing,
-and benchmarking of the BioModelAnalyzer software. We propose this prototype as a future
-model for promoting and embedding reproducibility into CAV.
-
+Reliably reproducing published scientific discoveries has been
+acknowledged as a barrier to scientific progress. Even when published
+results reflect the authors' interpretation perfectly, novel
+implementation of published algorithms, models and software, and their
+subsequent benchmarking, leaves substantial room for error. However,
+whilst this phenomena has been widely recognised and documented for
+some time, there remains only a small subset of software available to
+support the specific needs of the research community (i.e. beyond
+generic tools such as source code repositories). In this paper we
+propose a concrete e-infrastructure platform for reproducibility,
+based on a prototype which supports previously published work by the
+authors. The aim of this platform is to automate the build, unit
+testing, and benchmarking of the BioModelAnalyzer software. We thus
+propose this prototype workflow as a model to adopt for promoting and
+embedding reproducibility into future instances of CAV.
 \end{abstract}
 
+% TO DO:
+% consistency of artefact (UK) vs. artifact (US)...
+% trim to six pages!
+
 \section{Introduction}\label{intro}
-The reproducibility of scientific discovery has come into sharp focus over the past few years.
-Following a revoltion in the sharing and dissemination of published papers (\emph{Open Access})
-and the subsequent discussions relating to the sharing of protocols and materials (\emph{Open
-Science}) the ability of a researcher to take published data and reimplement the described
-workflow has been under scrutiny~\cite{gent:2013,sandve-et-al:2013}. This has been further supported by wider cultural issues in
-scientific community, where irreproducible, and frequently high profile results 
-are increasingly being identified and retracted from the literature~\cite{retraction_watch}.
-We have previously documented some of the technical and cultural barriers to reproducing 
-work across multiple disciplines in the computational sciences, both in terms of the sharing
-of algorithms~\cite{crick-et-al_recomp2014} and benchmark sets~\cite{crick-et-al_wssspe2}. 
-The impact of irreproducibility is however broadly felt across multiple disciplines, with 
-well discussed issues psychology~\cite{chambers-et-al:2014} and others.
 
-Reproducibility has now been explicitly acknowledged as a desirable quality in a number of 
-different conferences, including CAV (through the CAV Artefact Evaluation) and TACAS. Some conferences explcitly note that 
-the provision of \emph{artefacts} (an accessible tool for reproducing results) is desirable
-but does not change the ultimate outcome of the review e.g. OOPSLA. Several biological journals
-(e.g. Bioinformatics, PLoS Computational Biology) explicitly require that source code is
-made available under an open source license, or through a web interface. 
+The reproducibility of scientific discovery has come into sharp focus
+over the past few years.  Following a revolution in the sharing and
+dissemination of published papers (\emph{open access}) and the
+subsequent discussions relating to the sharing of protocols and
+materials (\emph{open science}) the ability of a researcher to take
+published results and data and reimplement the described workflow has
+been under scrutiny~\cite{gent:2013,sandve-et-al:2013}. This has been
+further supported by wider cultural issues in scientific community,
+where irreproducible, and frequently high profile results are
+increasingly being identified and retracted from the
+literature\footnote{Retraction Watch: Tracking retractions as a window
+into the scientific process\\\url{http://retractionwatch.com/}}.  We
+have previously documented some of the technical and cultural barriers
+to reproducing work across a number of disciplines in the
+computational sciences, both in terms of the sharing of
+algorithms~\cite{crick-et-al_recomp2014} and benchmark
+sets~\cite{crick-et-al_wssspe2}.  Nevertheless, the impact of
+irreproducibility is keenly felt across multiple disciplines, with
+well discussed issues e.g. psychology~\cite{chambers-et-al:2014}.
 
-%Cite: Recomputation Manifesto~\cite{gent:2013}, 10 Simple Rules for Reproducible
-%Research~\cite{sandve-et-al:2013}, Stodden~\cite{stodden-et-al:2013},
-%changes to dissemination in other fields e.g. psychology~\cite{chambers-et-al:2014}.
+Reproducibility has now been explicitly acknowledged as a desirable
+quality in a number of different conferences, including CAV (through
+the CAV Artefact
+Evaluation\footnote{\url{http://i-cav.org/2015/evaluation/}}), driven
+in a number of instances by the
+cTuning\footnote{\url{http://ctuning.org/}} and Collective
+Mind\footnote{\url{http://ctuning.org/cm/wiki/index.php?title=Main_Page}}
+initiatives
+e.g. CGO\footnote{\url{http://ctuning.org/cm/wiki/index.php?title=Reproducibility:AE:CGO2015}},
+PPoPP\footnote{\url{http://ctuning.org/cm/wiki/index.php?title=Reproducibility:AE:PPoPP2015}},
+TRUST\footnote{\url{http://ctuning.org/cm/wiki/index.php?title=Events:TRUST2014}} 
+and ADAPT\footnote{\url{http://www.adapt-workshop.org/}}. Some
+conferences explicitly note that the provision of \emph{artefacts} (an
+accessible tool for reproducing results) is desirable but does not
+change the ultimate outcome of the review e.g. SPLASH (OOPSLA): 
 
 % http://2014.splashcon.org/track/splash2014-artifacts#About
-From SPLASH: {\emph{OOPSLA Artifacts: The Artifact Evaluation Committee has been formed
+\begin{quotation}
+{\emph{{\textbf{OOPSLA Artifacts:}} The Artifact Evaluation Committee has been formed
 to assess how well paper authors prepare artifacts in support of such
 future researchers. Roughly, authors of papers who wish to participate
 are invited to submit an artifact that supports the conclusions of the
@@ -84,8 +106,19 @@ submission is voluntary and will not influence the final decision
 regarding the papers. Papers that go through the Artifact Evaluation
 process successfully receive a seal of approval printed on the first
 page of the paper in the OOPSLA proceedings.}}
+\end{quotation}
 
-Other examples: ACM TRUST~\cite{fursin+dubach:2014}; using proofs and
+Several biological journals (e.g. Bioinformatics, PLoS Computational
+Biology) explicitly require that source code is made available under
+an open source license, or through a web interface.
+
+% TACAS\footnote{\url{http://www.etaps.org/index.php/2015/tacas}}
+%Cite: Recomputation Manifesto~\cite{gent:2013}, 10 Simple Rules for Reproducible
+%Research~\cite{sandve-et-al:2013}, Stodden~\cite{stodden-et-al:2013},
+%changes to dissemination in other fields e.g. psychology~\cite{chambers-et-al:2014}.
+
+
+Other examples: ACM SIGPLAN TRUST~\cite{fursin+dubach:2014}; using proofs and
 Coq e.g. POPL/PLDI/ICFP.
 
 % Q: do we need to define artefact? different from model, etc, also
@@ -118,7 +151,7 @@ A service for reproducibility is intended to play three important roles. It shou
 	\item Demonstrate that a piece of code can be compiled, run and behaves as described,
 		without manual intervention from the developer.
 	\item Store and link specific artefacts and their with different publications
-		or other publically accessible datasets.
+		or other publicly accessible datasets.
 	\item Allow new benchmarks to be added, by users other than the developer, to 
 		widen the testing and identify potential bugs.
 \end{enumerate}
@@ -126,7 +159,7 @@ A service for reproducibility is intended to play three important roles. It shou
 Furthermore, we feel that such a service must require the minimum developer intervention.
 This serves multiple purposes- through automation for example, the service can be enabled to compile 
 new code and test new benchmarks trivially. This also forces the developer to make local
-workarounds or hacks publically viewable. As such, this requires the developer to make the 
+workarounds or hacks publicly viewable. As such, this requires the developer to make the 
 project dependencies clearly available, and enables future changes in the dependencies 
 (such as a library update) to be tested automatically too. 
 
@@ -136,10 +169,10 @@ to ensure that the code compiles and runs on the service. To minimise this, the 
 needs to connect to standard code repositories, automatically detecting and responding to
 new versions of the code and updates to dependencies, running tests for every new code commit.
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
-	\includegraphics[width=0.9\textwidth]{workflow}
-	\caption{Proposed service workflow.}
+	\includegraphics[width=\textwidth]{workflow}
+	\caption{Proposed reproducibility service workflow}
 	\label{schematic}
 \end{figure}
 	
@@ -148,15 +181,15 @@ figure~\ref{schematic}. Two classes of user are defined; developers, who generat
 and modellers, who generate new benchmarks. An individual might in practice play either
 or both of these roles; here the roles serve to define ways in which people interact with
 the system. A developer writes new code, which is periodically pushed to a repository 
-such as github. Through integration with the repository, the server responds to new 
+such as GitHub. Through integration with the repository, the server responds to new 
 code by undergoing a process of pulling the code from the repository, downloading 
 required dependencies, and compiling the code. If this stage fails, the developer is 
 informed and the workflow ends. If the code is successfully compiled, two stages of 
-testing are performed. The first stage (labelled "test" in figure~\ref{schematic}), involves
+testing are performed. The first stage (labelled {\emph{test}} in Figure~\ref{schematic}), involves
 running a series of basic tests defined by the developer. This is intended as a sanity check 
 to ensure that basic features of the code have not been broken by the updated code, and 
-failure to pass these tests is reported and ends the work flow. If this completes succesfully,
-the second stage (labelled "benchmark" in figure~\ref{schematic}) a series of models are 
+failure to pass these tests is reported and ends the work flow. If this completes successfully,
+the second stage (labelled {\emph{benchmark}} in Figure~\ref{schematic}) a series of models are 
 tested for a known property, and the results recorded. These results can then be stored
 in a database, with a note of the commit ID, and presented through a web interface for 
 future analysis. 
@@ -172,8 +205,8 @@ immediately clear. The modeller submits a broad range of tests which may highlig
 material flaws (i.e. bugs) in the implementation, or the algorithm. More than this
 however, the modeller may generate models which identify weaknesses of either an
 algorithm or an implementation. One example from the authors experience is the 
-series of models with "timed-switches" described in \cite{cook2014}; this is discussed 
-in greater depth below in~\ref{example}.
+series of models with ``timed-switches'' described in \cite{cook2014}; this is discussed 
+in greater depth below in section~\ref{example}.
 
 Finally, dependencies for a given implementation need explicit testing. Due to the
 highly variable and sometimes complex nature of dependencies, we see this as an
@@ -204,10 +237,10 @@ to reproducibility efforts- it has been estimated (in CACM, a closed but arguabl
 affordable journal) that a shift to becoming exclusively open access may lead to a 
 ten-fold increase in computer science publication costs~\cite{vardi-cacm-2014}. The
 benefits to the community from a cultural change to favour reproducibility are clear
-however, and as such we should aim through the software and the roll-out to mitagate 
+however, and as such we should aim through the software and the roll-out to mitigate 
 these costs. Furthermore,
 we can reasonably expect the needs of the community to evolve over time, and initial 
-implmentations of the platform may require refinement in response to user feedback. As
+implementations of the platform may require refinement in response to user feedback. As
 such, if the community is to move to requiring reproducibility, it seems most reasonable
 that this is staggered over a number of years to allow for both of these elements to
 develop. We recommend that the tools pass through two testing phases, until eventually
@@ -225,20 +258,24 @@ assess reproducibility in the review process.
 This plan balances competing needs within the community, and would reduce the activation
 energy for uptake by gradually introducing it to authors.
 
-\section{The BioModelAnalyzer as a worked example}\label{example}
+\section{Example case study: BioModelAnalyzer}\label{example}
 
-{\textbf{IDEA: pick one of Samin's CAV papers (BMA?) and run it through the process
-and see what happens.}}
+% IDEA: pick one of Samin's CAV papers (BMA?) and run it through the
+% process and see what happens.
 
-The BioModelAnalyzer is a tool for the development and analysis of a specific 
-class of formal models for biology~\cite{benque2012,cook2010,cook2014}. Models 
-are built by biologists in a web browser and are explored at present by a combination 
-of simulation and model checking. The tool specifically allows users to test for 
-model \emph{stability}; that is, a bespoke algorithm proves that for all initial 
-states a model always ends in a single fixpoint. We have choosen this example due
-to our familiarity with the tool, and to highlight historical examples where a 
-reproducibility service would have supported both code development and algorithm
-discovery.
+The
+BioModelAnalyzer\footnote{\url{http://biomodelanalyzer.research.microsoft.com/}}
+is a tool for the development and analysis of a specific class of
+formal models for
+biology~\cite{benque2012,cook-et-al:2010,cook2014}. Models are built
+by biologists in a web browser and are explored at present by a
+combination of simulation and model checking. The tool specifically
+allows users to test for model \emph{stability}; that is, a bespoke
+algorithm proves that for all initial states a model always ends in a
+single fixpoint. We have chosen this example due to our familiarity
+with the tool, and to highlight historical examples where a
+reproducibility service would have supported both code development and
+algorithm discovery.
 
 Suggested things to discuss here- the proposed benefits of such a service:
 
@@ -298,7 +335,7 @@ paper, the results will be verified
 \item specify review criteria, but essentially: {\emph{can I evaluate/execute this
   artefact and get the same results that are presented in the paper?}}
 \item reporting: traffic lights and ranked list
-\item at the start, this is not complusory, but this will change over a period of
+\item at the start, this is not compulsory, but this will change over a period of
 time -- effecting cultural change and this would then become a
 necessary condition.
 \item Repo/database or previous artefacts, which would build over the
@@ -314,9 +351,8 @@ How best to secure a service which compiles and runs arbitrary code on arbitrary
 How to estimate raw performance on the cloud?
 
 \section{Conclusions}\label{concl}
-We've done this for CAV...
-
-
+We thus propose that this could be trialled for CAV in 2016, with a
+announced schedule for widespread adoption in future years...
 
 \bibliographystyle{splncs}
 \bibliography{cav2015}
