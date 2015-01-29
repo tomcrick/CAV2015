@@ -8,7 +8,7 @@
 %\fussy
 
 
-\title{A Reproducibility Model for CAV}
+\title{CAV: We Need to Talk About Reproducibility}
 
 \author{Tom Crick\inst{1} \and Benjamin A. Hall\inst{2} \and Samin Ishtiaq\inst{3}}
 
@@ -58,12 +58,32 @@ BioModelAnalyzer software.
 
 \section{Introduction}\label{intro}
 
-SI/BAH: We start off with something like: this is not a theory paper, not a tool paper. 
-this is a paper to start a discussion in the CAV community about tool reproduciblity. 
+\begin{quotation}
+{\emph{CAV 2015 is the 27th in a series dedicated to the advancement
+    of the theory and practice of computer-aided formal analysis
+    methods for hardware and software systems.  CAV considers it vital
+    to continue spurring advances in hardware and software
+    verification while expanding to new domains such as biological
+    systems and computer security. The conference covers the spectrum
+    from theoretical results to concrete applications, with an
+    emphasis on practical verification tools and the algorithms and
+    techniques that are needed for their implementation.}}
+\end{quotation}
 
-SI/BAH: We (BMA) have published pretty exclusively in CAV. We would have benefited had
-such a reproducibliity infrastructure been around to catch our own breakage. 
-
+% SI/BAH: We start off with something like: this is not a theory paper, not a tool paper. 
+% this is a paper to start a discussion in the CAV community about tool reproducibility. 
+This is not a theory paper or a tool paper, nor an industrial case
+study. The aim of this paper is to start a discussion in the CAV
+community about reproducibility of algorithms, models, tools and
+benchmarks across the computer-aided formal analysis and verification
+research domain. There is a significant opportunity for the CAV
+community to identify and address the technical and socio-cultural
+issues surrounding reproducibility in both the cognate research domain
+as well as more broadly for computing science; a desirable outcome
+would be a clear specification to encourage, enable and enforce
+reproducibility. Expressing a standard for reproducibility would have
+a clear benefit for researchers as well as the CAV community as a
+whole.
 
 The reproducibility of scientific discovery has become a major topic
 of discussion over the past few years, as we have seen a step-change
@@ -85,9 +105,9 @@ results are being identified and retracted from the
 literature\footnote{Retraction Watch: Tracking retractions as a window
 into the scientific process\\\url{http://retractionwatch.com/}}.  We
 have previously documented some of the technical and cultural barriers
-to reproducing work across a number of disciplines in the
-computational sciences, both in terms of the sharing of
-algorithms~\cite{crick-et-al_recomp2014} and models and benchmark
+to reproducing work across computing and computational sciences, both
+in terms of the sharing of algorithms~\cite{crick-et-al_recomp2014}
+and models and benchmark
 sets~\cite{crick-et-al_wssspe2}. Nevertheless, the impact of
 irreproducibility is keenly felt across multiple disciplines, with
 well discussed issues in computer science~\cite{collberg-et-al:2014},
@@ -95,25 +115,44 @@ life sciences~\cite{rollins-et-al:2014},
 psychology~\cite{chambers-et-al:2014} and the social
 sciences~\cite{conte-et-al:2012}.
 
-Reproducibility has now been explicitly acknowledged as a desirable
-quality~\cite{gent:2013,crick+chuehong:2014} -- including at CAV
+While reproducibility has been acknowledged as a desirable
+quality -- including at CAV
 through the CAV Artefact
 Evaluation\footnote{\url{http://i-cav.org/2015/evaluation/}} process
--- driven at a number of conferences and workshops by the cTuning and
-Collective Mind initiatives\footnote{\url{http://ctuning.org/}}
+-- and driven at a number of conferences and workshops by the cTuning
+and Collective Mind initiatives\footnote{\url{http://ctuning.org/}}
 e.g. CGO\footnote{\url{http://ctuning.org/cm/wiki/index.php?title=Reproducibility:AE:CGO2015}},
 PPoPP\footnote{\url{http://ctuning.org/cm/wiki/index.php?title=Reproducibility:AE:PPoPP2015}},
 TRUST\footnote{\url{http://ctuning.org/cm/wiki/index.php?title=Events:TRUST2014}}
-and ADAPT\footnote{\url{http://www.adapt-workshop.org/}}. Some
-conferences explicitly note that the provision of \emph{artefacts} (an
-accessible tool for reproducing results) is desirable but does not
-change the ultimate outcome of the review e.g. SPLASH
-(OOPSLA)\footnote{\url{http://2014.splashcon.org/track/splash2014-artifacts\#About}}.
-Several biological journals (e.g. Bioinformatics, PLoS Computational
-Biology) explicitly require that source code is made available under
-an open source license, or available online. There appear to be a
-clear focus on the community-driven reviewing and validation of
-research outputs~\cite{fursin+dubach:2014}.
+and ADAPT\footnote{\url{http://www.adapt-workshop.org/}}, there are
+still significant issues to overcome before we have a step change in
+how researchers view reproduciblity as a fundamental part of the
+research process.  There appear to be a focus on the community-driven
+reviewing and validation of research
+outputs~\cite{fursin+dubach:2014}, but most, if not all, conferences
+explicitly note that the provision of \emph{artefacts} (an accessible
+tool for reproducing results) is desirable but does not change the
+ultimate outcome of the review e.g. SPLASH
+(OOPSLA)\footnote{\url{http://2014.splashcon.org/track/splash2014-artifacts\#About}}. Furthermore, 
+while several journals (e.g. Bioinformatics, PLoS Computational
+Biology) explicitly require that source code and data is made
+available online under some form of open source license, this static
+approach does little for enabling verification or validation of
+scientific results at a later stage. This applies to the authors of
+this paper: as we explore in section~\ref{example}, we have published
+a number of times in CAV and our research and experiments would have benefited had
+such a reproducibility standard (and infrastructure) existed and been
+front and centre in the CAV community.
+
+While it is encouraging that there is a consensus emerging on the
+importance of reproducibility (and repeatability, recomputability,...and
+the multitude of `Rs' that underpin e-research), it should not be a
+topic only discussed at conference and workshops predicated on
+reproducibility. The authors have been involved in this
+process~\cite{crick+chuehong:2014}, but for it to progress it has to
+be embraced by specific research communities. Ultimately, we are
+setting a challenge for the CAV community: either say that this is
+important and address it or don't bother doing it at all.
 
 % http://2014.splashcon.org/track/splash2014-artifacts#About
 % \begin{quotation}
@@ -142,25 +181,25 @@ research outputs~\cite{fursin+dubach:2014}.
 % Q: do we need to define artefact? different from model, etc, also
 % domain terminology e.g. CS vs. physics.
 
-However, whilst provision of a single implementation or the current
-source code may not be sufficient to satisfactorily reproduce
-computational discoveries.  As discussed
-previously~\cite{crick-et-al_recomp2014}, external dependencies may
-change the behaviour, or in the case of an incompatible upgrade,
-prevent compilation. Other factors include ... These points of failure
-could be partially addressed by going beyond the sharing of source
-code and benchmarks, and sharing complete systems which build code and
-test the software in question. Such a system could be run centrally,
-independent of the researchers, and new papers could be associated
-with a submission of code and a set of benchmarks. This would ensure
-that the code compiles and runs as described, but would also serve as
-a repository of artefacts, allowing future researchers, who are
-perhaps suffering under a burden of code which does not compile or
-models which do not behave, a trusted example of a working
-implementation.
+% However, whilst provision of a single implementation or the current
+% source code may not be sufficient to satisfactorily reproduce
+% computational discoveries.  As discussed
+% previously~\cite{crick-et-al_recomp2014}, external dependencies may
+% change the behaviour, or in the case of an incompatible upgrade,
+% prevent compilation. Other factors include ... These points of failure
+% could be partially addressed by going beyond the sharing of source
+% code and benchmarks, and sharing complete systems which build code and
+% test the software in question. Such a system could be run centrally,
+% independent of the researchers, and new papers could be associated
+% with a submission of code and a set of benchmarks. This would ensure
+% that the code compiles and runs as described, but would also serve as
+% a repository of artefacts, allowing future researchers, who are
+% perhaps suffering under a burden of code which does not compile or
+% models which do not behave, a trusted example of a working
+% implementation.
 
 We thus propose an initial specification for a reproducibilty
-service. We present the requirements of the prototype, a suggested
+service for CAV. We present the requirements of the prototype, a suggested
 plan for introducing the tool to the community, and a case study
 example describing how we would expect the tool to work, based upon a
 previous accepted CAV paper by the authors. Finally, we highlight key
