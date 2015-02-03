@@ -380,7 +380,7 @@ costs~\cite{vardi-cacm-2014}.
 
 The
 BioModelAnalyzer\footnote{\url{http://biomodelanalyzer.research.microsoft.com/}}
-is a tool for the development and analysis of a specific class of
+(BMA) is a tool for the development and analysis of a specific class of
 formal models for
 biology~\cite{benque2012,cook-et-al:2010,cook2014}. Models are built
 by biologists in a web browser and are explored at present by a
@@ -391,6 +391,25 @@ single fixpoint. We have chosen this example due to our familiarity
 with the tool, and to highlight historical examples where a
 reproducibility service would have supported both code development and
 algorithm discovery.
+
+The benefits for reproducibility testing for a service are clear. In a sense,
+reproducibility here is an extension of the standard practice of \emph{testing}.
+Three features distinguish our aims for reproducibility here: compilation and testing
+in a new machine, a continuous integration strategy for code commits, and 
+the ability to add and remove benchmarks to the test set.
+
+\subsection{\emph{de novo} Build Environments}
+
+Throughout the lifetime of the BMA development has been shared between a 
+number of developers, working on different aspects of the tool. Work in 
+algorithm development~\cite{cook2014,piterman2013} focuses on adding 
+new features to a command line tool with few dependencies, aiding rapid 
+development. In contrast, the graphical model construction and testing 
+environment has typically been done by a single or pair of individuals. 
+This necessarily required a number of dependencies, reflecting the use
+of Azure and Silverlight.
+
+
 
 Suggested things to discuss here- the proposed benefits of such a service:
 
