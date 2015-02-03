@@ -78,7 +78,7 @@ using the BioModelAnalyzer software.
  
 This is not a theory paper or a tool paper, nor an industrial case
 study. The aim of this paper is to start a discussion in the CAV
-community about reproducibility of algorithms, models, tools and
+community about the reproducibility of algorithms, models, tools and
 benchmarks across the computer-aided formal analysis and verification
 research domain. There is a significant opportunity for the CAV
 community to identify and address the technical and socio-cultural
@@ -90,18 +90,18 @@ a clear benefit for researchers as well as the CAV community as a
 whole.
 
 The reproducibility of scientific discovery has become a major topic
-of discussion over the past few years, as we have seen a step-change
-in how science and engineering is done. Experiments, simulations,
-models, benchmarks, even proofs cannot be done without leveraging
-software and computation. A 2012 report by the Royal Society stated
-that computational techniques have ``{\emph{moved on from assisting
+of discussion over the past few years, as we have seen a shift in how
+science and engineering is done. Experiments, simulations, models,
+benchmarks, even proofs cannot be done without leveraging software and
+computation. A 2012 report by the Royal Society stated that
+computational techniques have ``{\emph{moved on from assisting
 scientists in doing science, to transforming both how science is done
 and what science is done}}''~\cite{rssaaoe:2012}. Following a
 revolution in the sharing and dissemination of published papers
 (\emph{open access}) and the subsequent discussions relating to the
-sharing of protocols and materials (\emph{open science}) the ability
+sharing of protocols and materials (\emph{open science}), the ability
 of a researcher to take published results and data and reimplement the
-described workflow has been under significant
+described workflow has been under increasing
 scrutiny~\cite{stodden-et-al:2013,sandve-et-al:2013,wilson-et-al:2014}. This
 has been further supported by wider cultural changes in the scientific
 community, where increasingly high profile -- and irreproducible --
@@ -110,63 +110,68 @@ literature\footnote{Retraction Watch: Tracking retractions as a window
 into the scientific
 process\\\url{http://retractionwatch.com/}}. Alongside the
 ramifications of damaging the credibility and veracity of the research
-base, there are also clear consequences for research funding: recent statistics
-for US National Institute of Health funding between 1992 and 2012
-found that papers retracted due to misconduct accounted for
+base, there are also clear consequences for research funding: recent
+statistics for US National Institute of Health funding between 1992
+and 2012 found that papers retracted due to misconduct accounted for
 approximately \$58 million, c.\$400,000 per
 paper~\cite{stern-et-al:2014}. We have previously documented some of
 the technical and cultural barriers to reproducing work across
-computing and computational sciences, both in terms of the sharing of
-algorithms~\cite{crick-et-al_recomp2014} and models and benchmark
-sets~\cite{crick-et-al_wssspe2}. Nevertheless, the impact of
-irreproducibility is keenly felt across multiple disciplines, with
-well discussed issues in computer science~\cite{collberg-et-al:2014},
-life sciences~\cite{rollins-et-al:2014},
+computing and the computational sciences, both in terms of the sharing
+of algorithms~\cite{crick-et-al_recomp2014} and models and benchmark
+sets~\cite{crick-et-al_wssspe2}. The impact of irreproducibility is
+keenly felt across multiple disciplines, with well discussed issues in
+computer science~\cite{collberg-et-al:2014}, life
+sciences~\cite{rollins-et-al:2014},
 psychology~\cite{chambers-et-al:2014} and the social
 sciences~\cite{conte-et-al:2012}.
 
-While reproducibility has been acknowledged as a desirable quality --
-including at CAV through the CAV Artefact
-Evaluation\footnote{\url{http://i-cav.org/2015/evaluation/}} process
--- and driven at a number of conferences and workshops by the cTuning
-and Collective Mind initiatives\footnote{\url{http://ctuning.org/}}
-e.g. CGO\footnote{\url{http://ctuning.org/cm/wiki/index.php?title=Reproducibility:AE:CGO2015}},
+Reproducibility has been acknowledged as a desirable quality at some
+international conferences and workshops (including at CAV through the
+{\emph{CAV Artefact
+Evaluation}}\footnote{\url{http://i-cav.org/2015/evaluation/}}
+process), but there are still significant issues to overcome before we
+have a step change in how researchers view reproduciblity as a
+fundamental part of the research process. Examples of conference and
+workshops explicitly attempting to address reproducibility in their
+fields include: ACM
+SIGMOD\footnote{\url{http://db-reproducibility.seas.harvard.edu/}},
+CGO\footnote{\url{http://ctuning.org/cm/wiki/index.php?title=Reproducibility:AE:CGO2015}},
+SPLASH
+(OOPSLA)\footnote{\url{http://2014.splashcon.org/track/splash2014-artifacts}},
 PPoPP\footnote{\url{http://ctuning.org/cm/wiki/index.php?title=Reproducibility:AE:PPoPP2015}},
 TRUST\footnote{\url{http://ctuning.org/cm/wiki/index.php?title=Events:TRUST2014}}
-and ADAPT\footnote{\url{http://www.adapt-workshop.org/}}, there are
-still significant issues to overcome before we have a step change in
-how researchers view reproduciblity as a fundamental part of the
-research process.  There appear to be a focus on the community-driven
-reviewing and validation of research
+(PLDI) and ADAPT\footnote{\url{http://www.adapt-workshop.org/}}
+(HiPEAC). Due to the work of the cTuning and Collective Mind
+initiatives\footnote{\url{http://ctuning.org/}}, there is now a focus
+on the community-driven reviewing and validation of research
 outputs~\cite{fursin+dubach:2014}, but most, if not all, conferences
 explicitly note that the provision of \emph{artefacts} (an accessible
 tool for reproducing results) is desirable but does not change the
-ultimate outcome of the review e.g. SPLASH
-(OOPSLA)\footnote{\url{http://2014.splashcon.org/track/splash2014-artifacts\#About}}.
-Furthermore, while several journals (e.g. Bioinformatics, PLoS
-Computational Biology) explicitly require that source code and data is
-made available online under some form of open source license, this
-static approach does little for enabling verification or validation of
-scientific results at a later stage. This applies to the authors of
-this paper: as we explore in section~\ref{example}, we have published
-a number of times in CAV and our research and experiments would have
+ultimate outcome of the review.  Furthermore, while several journals
+(e.g. Nature, PLoS Computational Biology, Bioinformatics) explicitly
+require that source code and data is made available online under some
+form of open source license, this static approach does little for
+enabling verification or validation of scientific results at a later
+stage. This applies to the authors of this paper: as we explore in
+section~\ref{example}, we have published a number of times in CAV (and
+other similar domains) and our research and experiments would have
 benefited had such a reproducibility standard (and infrastructure)
-existed and been front and centre in the CAV community.
+existed and been encouraged.
 
 While it is encouraging that there is a consensus emerging on the
 importance of reproducibility (and repeatability, recomputability and
-the multitude of `Rs' that underpin e-research), it should not be a
+the multitude of `Rs' that underpin e-research), it must not be a
 topic only discussed at conference and workshops convened specifically
 on the topic of reproducibility. The authors have been involved in
 this process~\cite{crick+chuehong:2014}, but for it to progress it has
-to be embraced by specific research communities at their major
-conferences and workshops. Therein lies a fundamental advantage of
-computer science and more broadly, computational science: the unique
-ability to easily share the raw outputs of our work as software and
-datafiles. As researchers in this field, we should be good at this;
-ultimately, we are setting a challenge for the CAV community: we need
-to explicitly state that this is important and address it or don't
-bother doing it at all.
+to be embraced and developed by specific research communities at their
+major conferences and workshops. And here lies a fundamental advantage
+of computer science and more broadly, computational science: the
+unique ability to easily share the raw outputs of our work as software
+and datafiles. As researchers in this field, we should be good at
+this; ultimately, we are setting a challenge for the CAV community: we
+need to explicitly state that this is important and address it or
+don't bother doing it at all.
 
 % http://2014.splashcon.org/track/splash2014-artifacts#About
 % \begin{quotation}
@@ -228,17 +233,19 @@ A service for reproducibility is intended to play three important roles. It shou
 	\item Demonstrate that a piece of code can be compiled, run and behaves as described,
 		without manual intervention from the developer.
 	\item Store and link specific artefacts and their with different publications
-		or other publicly accessible datasets.
+		or other publicly-accessible datasets.
 	\item Allow new benchmarks to be added, by users other than the developer, to 
 		widen the testing and identify potential bugs.
 \end{enumerate}
  
-Furthermore, we feel that such a service must require the minimum developer intervention.
-This serves multiple purposes -- through automation for example, the service can be enabled to compile 
-new code and test new benchmarks trivially. This also forces the developer to make local
-workarounds or hacks publicly viewable. As such, this requires the developer to make the 
-project dependencies clearly available, and enables future changes in the dependencies 
-(such as a library update) to be tested automatically too. 
+Furthermore, we feel that such a service must require minimal
+developer intervention.  This serves multiple purposes -- through
+automation for example, the service can be enabled to compile new code
+and test new benchmarks trivially. This also forces the developer to
+make local workarounds or hacks publicly viewable. As such, this
+requires the developer to make the project dependencies clearly
+available, and enables future changes in the dependencies (such as a
+library update) to be tested automatically too.
 
 Finally, the service must fit easily into the developers workflow. As
 noted in section~\ref{rollout} we expect that there will be some costs
@@ -311,38 +318,43 @@ breaking changes induced by third parties.
 
 Following the proposal of such a system, the question becomes:
 {\emph{how do we encourage widespread uptake, or even standardisation?}}
-Such a service may appear trivial, given the large numbers of tools
-which could potentially support the service. There remain however key
-questions that can only be answered on implementation. Furthermore,
+Such a service may appear non-trivial, given the large numbers of
+tools and workflows
+that could potentially require to be supported by the service. Furthermore,
 after such a service has been implemented, how do we ensure it is
-\emph{useful} and \emph{usable} for researchers.
+\emph{useful} and \emph{usable} for researchers. To address this, we
+propose the following workflow for CAV:
 
 % workflow
-
 \begin{enumerate}
-\item Call for papers: clearly advertised and high profile in conf cfp
-  -- this is a new thing and a change in how we're doing stuff.
-\item The game is changing, but this is (currently) extra to the
-  normal reviewing process: 
-e.g. {\emph{This submission is voluntary and will not influence the final decision
-regarding the papers.}} -- independent of the scientific merit of the
-paper, the results will be verified 
-\item (prize? as well as ranked ordering at end of conf, listed in
-  proceedings, badge, seal of approval, etc)
-\item explicit criteria for authors? but essentially: {\emph{make this
-      as easy as possible for us to evaluate/execute your artefact!}}
-\item when papers are submitted, they have to nominate whether they
-  want their paper to go through artefact review
-\item (then you need artefact reviewers, probably taken from the pool of
-  reviewers, but will need specialism)
-\item specify review criteria, but essentially: {\emph{can I evaluate/execute this
+\item Before conference: clear signposting for authors; it should be
+advertised and promoted in the CAV call for papers to highlight this
+is a step-change in how we address reproducibility. Call for artefact
+reviewers with a range of specialisms, with a named chair of the review team.
+\item Explicit criteria for authors? Essentially: {\emph{make this as
+easy as possible for us to evaluate/execute your artefact!}}. We would
+aim to articulate the review criteria, but the primary aim is: {\emph{can I evaluate/execute this
   artefact and get the same results that are presented in the paper?}}
-\item reporting: traffic lights and ranked list
-\item at the start, this is not compulsory, but this will change over a period of
+\item Reviewing: in the first instance, it may be seen as an extra
+(voluntary) step to the normal reviewing process: e.g. {\emph{This
+submission is voluntary and will not influence the final decision
+regarding the papers.}}. Independent of the scientific merit of the
+paper, the results will be verified. To encourage this, there may be a
+prize, as well as ranked ordering and listed in conference proceedings
+(seal of approval?).
+\item Submission: when papers are submitted, they have to nominate whether they
+  want their paper to go through artefact review (at the start, this
+  may not be compulsory, but this will change over a period of
 time -- effecting cultural change and this would then become a
-necessary condition.
-\item Repo/database or previous artefacts, which would build over the
-  years to give exemplars and comparisons.
+necessary condition and a formal stage in the reviewing workflow),
+  along with required tools, libraries and (ideally) computational requirements.
+\item Evaluation: artefact evaluation process runs concurrent to the
+  standard paper review process.
+\item Reporting: traffic lights system (ranked list?) to indicate the level of
+  reproducibility of the submitted artefact. 
+\item Community curation: over a number of CAV cycles, we would have a
+  community curated repository/database of previous artefacts, which
+  would provide exemplars, comparisons and emerging best practice.
 \end{enumerate}
 
 The key question for different research communities then becomes: how
