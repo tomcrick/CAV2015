@@ -34,8 +34,7 @@ Microsoft Research Cambridge, UK\\
 
 \begin{abstract}
 How many times have you tried to re-implement a past CAV tool paper,
-and failed?
-
+and failed? 
 Reliably reproducing published scientific discoveries has been
 acknowledged as a barrier to scientific progress for some time but
 there remains only a small subset of software available to support the
@@ -43,11 +42,7 @@ specific needs of the research community (i.e. beyond generic tools
 such as source code repositories). In this paper we propose an
 infrastructure for enabling reproducibility in our community, by
 automating the build, unit testing and benchmarking of research
-software.
-
-We propose a workflow model for future instances of CAV to adopt for
-promoting and embedding reproducibility, illustrated by a case study
-using the BioModelAnalyzer software.
+software. 
 \end{abstract}
 
 % Keywords for Easychair:
@@ -64,6 +59,7 @@ using the BioModelAnalyzer software.
 
 \section{Introduction}\label{intro}
 
+SI: drop
 \begin{quotation}
 {\emph{CAV 2015 is the 27th in a series dedicated to the advancement
     of the theory and practice of computer-aided formal analysis
@@ -88,6 +84,9 @@ would be a clear specification to encourage, enable and enforce
 reproducibility. Expressing a standard for reproducibility would have
 a clear benefit for researchers as well as the CAV community as a
 whole.
+
+SI: too much blah blah in this next para. We should focus on hitting
+the Artefact Eval Cmmttee.
 
 The reproducibility of scientific discovery has become a major topic
 of discussion over the past few years, as we have seen a shift in how
@@ -152,7 +151,9 @@ ultimate outcome of the review.  Furthermore, while several journals
 require that source code and data is made available online under some
 form of open source license, this static approach does little for
 enabling verification or validation of scientific results at a later
-stage. This applies to the authors of this paper: as we explore in
+stage. 
+SI: drop this sentence if we drop Example Section.
+This applies to the authors of this paper: as we explore in
 section~\ref{example}, we have published a number of times in CAV (and
 other similar domains) and our research and experiments would have
 benefited had such a reproducibility standard (and infrastructure)
@@ -216,6 +217,10 @@ don't bother doing it at all.
 % perhaps suffering under a burden of code which does not compile or
 % models which do not behave, a trusted example of a working
 % implementation.
+
+SI: we do more than ``propose an initial''. This paper is basically an
+op-ed, inviting CAV practioners to embrase the new methodology. Practically,
+we propose an initial specification
 
 We thus propose an initial specification for a reproducibilty
 service for CAV. We present the requirements of the prototype, a suggested
