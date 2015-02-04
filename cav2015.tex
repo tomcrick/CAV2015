@@ -393,7 +393,7 @@ energy for uptake by gradually introducing it to authors.
 
 The
 BioModelAnalyzer\footnote{\url{http://biomodelanalyzer.research.microsoft.com/}}
-is a tool for the development and analysis of a specific class of
+(BMA) is a tool for the development and analysis of a specific class of
 formal models for
 biology~\cite{benque2012,cook-et-al:2010,cook2014}. Models are built
 by biologists in a web browser and are explored at present by a
@@ -405,29 +405,59 @@ with the tool, and to highlight historical examples where a
 reproducibility service would have supported both code development and
 algorithm discovery.
 
-Suggested things to discuss here- the proposed benefits of such a service:
+The benefits for reproducibility testing for a service are clear. In a sense,
+reproducibility here is an extension of the standard practice of \emph{testing}.
+Three features distinguish our aims for reproducibility here: compilation and testing
+in a new machine, a continuous integration strategy for code commits, and 
+the ability to add and remove benchmarks to the test set.
 
-Local hacks to publish are not communicated preventing reuse
-(specific commands required to compile and publish the code, 
-relating to 64- and 32- bit capabilities, were not distributed
-and lost when a team member left)
-Service would- highlight when a codebase could not be compiled or run
+\subsection{\emph{de novo} Build Environments}
 
-Effects of rounding mechanisms in the algorithm implementation
-(swapping floors and rounds broke some things subtly)
-Service would- highlight these changes in behaviour clearly
+Throughout the lifetime of the BMA development has been shared between a 
+number of developers, working on different aspects of the tool. Work in 
+algorithm development~\cite{cook2014,piterman2013} focuses on adding 
+new features to a command line tool with few dependencies, aiding rapid 
+development. In contrast, the graphical model construction and testing 
+environment has typically been done by a single or pair of individuals. 
+This necessarily required a number of dependencies, reflecting the use
+of Azure and Silverlight.
 
-Impact of implementing "biological" intuition in the tool
-(changing the default target function of nodes with no inputs, also
-breaking things subtly)
-Service would- highlight the problems created
+In an early stage of development it was found that only a single machine 
+was capable of deploying the web service. This arose as the developer 
+responsible for writing and deploying the user interface had run a series
+of commands necessary to run the mixture of 64- and 32- bit components on
+Azure. These commands needed only be run once, and went undocumented, and 
+needed to be rediscovered later when other team members attemped to deploy.
+These problems would be identified trivially through the proposed service;
+such undocumented commands would lead to all tests failing until added to 
+the build process.
 
-Modelling reveals untested issues: range conversion
-(no original benchmarks had range conversion- new benchmarks did
-and showed unexpected behaviour, including a mismatch between symbolic
-and explicit implementations of range conversion)
-Service would- allow external users to add new benchmarks, which would make it
-easier to catch these issues
+\subsection{Tool Refinement}
+
+Throughout the development of the tool, many refinements have been made 
+to different implementations. Some of these were subtle, and were  
+identified by unit tests; for example rounding mechanisms were switched
+between floors and rounds following a scientific discussion. More complex
+changes however broke behaviours which were not tested in our available 
+benchmark set. One example was in the treatments with of nodes without
+inputs- ``biological intuition'' suggested that such nodes should have
+an alternative default function from other nodes. Here, the ability of 
+users to submit new benchmarks would aid identification of these breaking
+changes, by extending the test sets and simplifying the process of adding
+to the test sets, and forcing the question of what changes are appropriate
+(and how to update old models to keep correct behaviour).
+
+%skip this section? It just repeats the same problem as above
+%Modelling reveals untested issues: range conversion
+%(no original benchmarks had range conversion- new benchmarks did
+%and showed unexpected behaviour, including a mismatch between symbolic
+%and explicit implementations of range conversion)
+%Service would- allow external users to add new benchmarks, which would make it
+%easier to catch these issues
+
+\subsection{Identification of Algorithmic Weaknesses}
+
+
 
 Modelling reveals algorithmic weakness: timed switch models 
 (a new class of models was discovered which forced the tool to search 
