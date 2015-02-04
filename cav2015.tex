@@ -444,17 +444,21 @@ to the test sets, and forcing the question of what changes are appropriate
 
 \subsection{Identification of Algorithmic Weaknesses}
 
+In~\cite{cook2014} we presented a new algorithm for proving stability in 
+a new class of models. Whilst the paper focused on discussing the algorithm,
+identifying the new class of models was complex. Models with long cycles 
+and the new class of models (``non-trivially stable models'') both can take
+substantial time to search for cycles, and these models could only be proved
+stable using a combination of simulation (to identify the fix-point) and LTL
+queries (to prove that there existed no paths beyond a certain length which 
+did not include the fix-point)~\cite{piterman2013}. 
 
-
-Modelling reveals algorithmic weakness: timed switch models 
-(a new class of models was discovered which forced the tool to search 
-for large cycles explicitly to prove stability)
-Service would- allow these new models to have been identified earlier
-by highlighting that proofs of stability consistently timed out
-Service would- make it easier to prove stability multiple ways (e.g.
-through the LTL checker of CAV13)
-Service would- show the improvement in speed resulting from the introduction
-of the new algorithm
+The proposed service would allow both types of test to be included explicitly,
+and models to be routinely added to each algorithm. Models which time-out with 
+one but are successfully proved can be logged and identified for future study.
+The features which define them would be more easily found, and new algorithms
+developed to address the specific features of the model. It could further be 
+used to demonstrate the speed improvement arising from new algorithms.
 
 % Worked example of how issues could be highlighted and found over time: perhaps
 % another figure? linking code changes to discoveries could be drawn as a timeline. The 
