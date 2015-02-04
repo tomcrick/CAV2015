@@ -120,7 +120,7 @@ computing and the computational sciences, both in terms of the sharing
 of algorithms~\cite{crick-et-al_recomp2014} and models and benchmark
 sets~\cite{crick-et-al_wssspe2}. The impact of irreproducibility is
 keenly felt across multiple disciplines, with well discussed issues in
-computer science~\cite{collberg-et-al:2014}, life
+computer science~\cite{collberg-et-al:2014,walfish+blumberg:2015}, life
 sciences~\cite{rollins-et-al:2014},
 psychology~\cite{chambers-et-al:2014} and the social
 sciences~\cite{conte-et-al:2012}.
@@ -372,6 +372,19 @@ affordable journal) that a shift to becoming exclusively open access
 may lead to a ten-fold increase in computer science publication
 costs~\cite{vardi-cacm-2014}. 
 
+\begin{description}
+\item[Phase 1:] Offer the service as an optional extra in the testing phase, allowing users to demonstrate 
+the reliability of their code which could be taken into account in the review process.
+\item[Phase 2:] All authors must use the reproducibility service, but results are not used in the review
+process. The results of the test are used to refine the service and pick out any unaddressed issues
+\item[Phase 3:] All authors are required to use the service, and the results are explicitly used to 
+assess reproducibility in the review process.
+\end{description}
+
+This plan balances competing needs within the community, and would reduce the activation
+energy for uptake by gradually introducing it to authors.
+
+
 \section{Example case study: BioModelAnalyzer}\label{example}
 
 % NEEDS WORK!
@@ -442,31 +455,29 @@ How best to secure a service which compiles and runs arbitrary code on arbitrary
 How to estimate raw performance on the cloud?
 
 \section{Conclusions}\label{concl}
-We thus propose that this could be trialled for CAV in 2016, with a
-announced schedule for widespread adoption in future years...
 
-The benefits to the community from a cultural change to favour
-reproducibility are clear however, and as such we should aim through
-the software and the roll-out to mitigate these costs. Furthermore, we
-can reasonably expect the needs of the community to evolve over time,
-and initial implementations of the platform may require refinement in
-response to user feedback. As such, if the community is to move to
-requiring reproducibility, it seems most reasonable that this is
-staggered over a number of years to allow for both of these elements
-to develop. We recommend that the tools pass through two testing
-phases, until eventually all authors are required to use the service.
+We have proposed an initial specification for a reproducibilty service
+for CAV, which we feel should be adopted for CAV 2016. The aim of this
+paper is to initiate a discussion in the CAV community about the
+reproducibility of algorithms, models, tools and benchmarks across the
+computer-aided formal analysis and verification research
+domain. Defining a standard for reproducibility would have a clear
+tangible benefit for researchers as well as the CAV community as a
+whole. But more importantly, as researchers in this field, we should
+be good at this; ultimately, we have set a challenge for the CAV
+community: as researchers, we need to explicitly state that this is
+important and address it or don't bother doing it at all.
 
-\begin{description}
-\item[Phase 1:] Offer the service as an optional extra in the testing phase, allowing users to demonstrate 
-the reliability of their code which could be taken into account in the review process.
-\item[Phase 2:] All authors must use the reproducibility service, but results are not used in the review
-process. The results of the test are used to refine the service and pick out any unaddressed issues
-\item[Phase 3:] All authors are required to use the service, and the results are explicitly used to 
-assess reproducibility in the review process.
-\end{description}
-
-This plan balances competing needs within the community, and would reduce the activation
-energy for uptake by gradually introducing it to authors.
+% The benefits to the community from a cultural change to favour
+% reproducibility are clear however, and as such we should aim through
+% the software and the roll-out to mitigate these costs. Furthermore, we
+% can reasonably expect the needs of the community to evolve over time,
+% and initial implementations of the platform may require refinement in
+% response to user feedback. As such, if the community is to move to
+% requiring reproducibility, it seems most reasonable that this is
+% staggered over a number of years to allow for both of these elements
+% to develop. We recommend that the tools pass through two testing
+% phases, until eventually all authors are required to use the service.
 
 \bibliographystyle{splncs}
 \bibliography{cav2015}
