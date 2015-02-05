@@ -34,8 +34,7 @@ Microsoft Research Cambridge, UK\\
 
 \begin{abstract}
 How many times have you tried to re-implement a past CAV tool paper,
-and failed?
-
+and failed? 
 Reliably reproducing published scientific discoveries has been
 acknowledged as a barrier to scientific progress for some time but
 there remains only a small subset of software available to support the
@@ -43,11 +42,7 @@ specific needs of the research community (i.e. beyond generic tools
 such as source code repositories). In this paper we propose an
 infrastructure for enabling reproducibility in our community, by
 automating the build, unit testing and benchmarking of research
-software.
-
-We propose a workflow model for future instances of CAV to adopt for
-promoting and embedding reproducibility, illustrated by a case study
-using the BioModelAnalyzer software.
+software. 
 \end{abstract}
 
 % Keywords for Easychair:
@@ -64,17 +59,17 @@ using the BioModelAnalyzer software.
 
 \section{Introduction}\label{intro}
 
-\begin{quotation}
-{\emph{CAV 2015 is the 27th in a series dedicated to the advancement
-    of the theory and practice of computer-aided formal analysis
-    methods for hardware and software systems.  CAV considers it vital
-    to continue spurring advances in hardware and software
-    verification while expanding to new domains such as biological
-    systems and computer security. The conference covers the spectrum
-    from theoretical results to concrete applications, with an
-    emphasis on practical verification tools and the algorithms and
-    techniques that are needed for their implementation.}}
-\end{quotation}
+%% \begin{quotation}
+%% {\emph{CAV 2015 is the 27th in a series dedicated to the advancement
+%%     of the theory and practice of computer-aided formal analysis
+%%     methods for hardware and software systems.  CAV considers it vital
+%%     to continue spurring advances in hardware and software
+%%     verification while expanding to new domains such as biological
+%%     systems and computer security. The conference covers the spectrum
+%%     from theoretical results to concrete applications, with an
+%%     emphasis on practical verification tools and the algorithms and
+%%     techniques that are needed for their implementation.}}
+%% \end{quotation}
  
 This is not a theory paper or a tool paper, nor an industrial case
 study. The aim of this paper is to start a discussion in the CAV
@@ -89,32 +84,26 @@ reproducibility. Expressing a standard for reproducibility would have
 a clear benefit for researchers as well as the CAV community as a
 whole.
 
-The reproducibility of scientific discovery has become a major topic
-of discussion over the past few years, as we have seen a shift in how
-science and engineering is done. Experiments, simulations, models,
-benchmarks, even proofs cannot be done without leveraging software and
-computation. A 2012 report by the Royal Society stated that
-computational techniques have ``{\emph{moved on from assisting
-scientists in doing science, to transforming both how science is done
-and what science is done}}''~\cite{rssaaoe:2012}. Following a
-revolution in the sharing and dissemination of published papers
-(\emph{open access}) and the subsequent discussions relating to the
-sharing of protocols and materials (\emph{open science}), the ability
-of a researcher to take published results and data and reimplement the
-described workflow has been under increasing
-scrutiny~\cite{stodden-et-al:2013,sandve-et-al:2013,wilson-et-al:2014}. This
-has been further supported by wider cultural changes in the scientific
-community, where increasingly high profile -- and irreproducible --
-results are being identified and retracted from the
-literature\footnote{Retraction Watch: Tracking retractions as a window
+We do not need to sell the idea of reproducibility to the CAV
+community too much. We are used to writing papers about our algorithms
+and tools.  And reproducing others' work, or having our work
+reproduced, is the guts of those ``Benchmark Tables'' that CAV authors
+and referees both think are essential to their papers. In fact, the
+idea of reproducibility is gaining momentum in the wider scientific
+community of computer science~\cite{collberg-et-al:2014}, life
+sciences~\cite{rollins-et-al:2014},
+psychology~\cite{chambers-et-al:2014} and the social
+sciences~\cite{conte-et-al:2012}.
+Following a revolution in the sharing and dissemination of published
+papers (\emph{open access}) and the subsequent discussions relating to
+the sharing of protocols and materials (\emph{open science}), the
+ability of a researcher to take published results and data and
+reimplement the described workflow has been under increasing
+scrutiny~\cite{stodden-et-al:2013,sandve-et-al:2013,wilson-et-al:2014},
+\footnote{Retraction Watch: Tracking retractions as a window
 into the scientific
-process\\\url{http://retractionwatch.com/}}. Alongside the
-ramifications of damaging the credibility and veracity of the research
-base, there are also clear consequences for research funding: recent
-statistics for US National Institute of Health funding between 1992
-and 2012 found that papers retracted due to misconduct accounted for
-approximately \$58 million, c.\$400,000 per
-paper~\cite{stern-et-al:2014}. We have previously documented some of
+process\\\url{http://retractionwatch.com/}}. 
+We have previously documented some of
 the technical and cultural barriers to reproducing work across
 computing and the computational sciences, both in terms of the sharing
 of algorithms~\cite{crick-et-al_recomp2014} and models and benchmark
@@ -125,11 +114,16 @@ sciences~\cite{rollins-et-al:2014},
 psychology~\cite{chambers-et-al:2014} and the social
 sciences~\cite{conte-et-al:2012}.
 
-Reproducibility has been acknowledged as a desirable quality at some
-international conferences and workshops (including at CAV through the
-{\emph{CAV Artefact
-Evaluation}}\footnote{\url{http://i-cav.org/2015/evaluation/}}
-process), but there are still significant issues to overcome before we
+
+
+SI: redo from here 
+
+Reproducibility has been acknowledged as a desirable quality at 
+international conferences and workshops, and this year CAV has 
+set up an Arteefact
+Evaluation process. 
+
+ but there are still significant issues to overcome before we
 have a step change in how researchers view reproduciblity as a
 fundamental part of the research process. Examples of conference and
 workshops explicitly attempting to address reproducibility in their
@@ -152,11 +146,16 @@ ultimate outcome of the review.  Furthermore, while several journals
 require that source code and data is made available online under some
 form of open source license, this static approach does little for
 enabling verification or validation of scientific results at a later
-stage. This applies to the authors of this paper: as we explore in
+stage. 
+SI: drop this sentence if we drop Example Section.
+This applies to the authors of this paper: as we explore in
 section~\ref{example}, we have published a number of times in CAV (and
 other similar domains) and our research and experiments would have
 benefited had such a reproducibility standard (and infrastructure)
 existed and been encouraged.
+
+SI: talk about different standards, if there's no consensus of a CAV one. 
+
 
 While it is encouraging that there is a consensus emerging on the
 importance of reproducibility (and repeatability, recomputability and
@@ -216,6 +215,10 @@ don't bother doing it at all.
 % perhaps suffering under a burden of code which does not compile or
 % models which do not behave, a trusted example of a working
 % implementation.
+
+SI: we do more than ``propose an initial''. This paper is basically an
+op-ed, inviting CAV practioners to embrase the new methodology. Practically,
+we propose an initial specification
 
 We thus propose an initial specification for a reproducibilty
 service for CAV. We present the requirements of the prototype, a suggested
