@@ -135,11 +135,30 @@ This paper is a ``Call to Action'', inviting CAV practitioners to
 embrace a new methodology. Practically, we propose an initial
 specification specification for a reproducibilty service for CAV. We
 present the requirements of the prototype, and a suggested plan for
-introducing the tool to the community. We have a running example based
-upon a previously accepted CAV paper by the authors. Finally, we
-highlight key implementation issues relating to security and general
-applicability which will need mitigating or resolving before
-widespread acceptance by the research community.
+introducing the tool to the community. Finally, we highlight key
+implementation issues relating to security and general applicability
+which will need mitigating or resolving before widespread acceptance
+by the research community.  The benefits for reproducibility testing
+for a service are clear. In a sense, reproducibility here is an
+extension of the standard practice of \emph{testing}.  Three features
+distinguish our aims for reproducibility here: compilation and testing
+in a new machine, a continuous integration strategy for code commits,
+and the ability to add and remove benchmarks to the test set.
+
+We have a running example based upon a previously accepted CAV paper
+on the BioModelAnalyzer (BMA) by the authors.  BMA
+\url{http://biomodelanalyzer.research.microsoft.com/} is a tool for
+the development and analysis (simulation, model checking) of a
+specific class of formal models for
+biology~\cite{benque2012,cook-et-al:2010,cook2014}. The tool
+specifically allows users to test for model \emph{stability}; that is,
+a bespoke algorithm proves that for all initial states a model always
+ends in a single fixpoint. We have chosen this example due to our
+familiarity with the tool, and to highlight historical examples where
+a reproducibility service would have supported both code development
+and algorithm discovery.
+
+
 
 \section{A specification for reproducible computational science}\label{spec}
 
@@ -152,17 +171,39 @@ A service for reproducibility is intended to play three important roles. It shou
 	\item Allow new benchmarks to be added, by users other than the developer, to 
 		widen the testing and identify potential bugs.
 \end{enumerate}
- 
-Furthermore, we feel that such a service must require minimal
-developer intervention.  This serves multiple purposes -- through
-automation for example, the service can be enabled to compile new code
-and test new benchmarks trivially. This also forces the developer to
-make local workarounds or hacks publicly viewable. As such, this
-requires the developer to make the project dependencies clearly
-available, and enables future changes in the dependencies (such as a
-library update) to be tested automatically too.
 
-Finally, the service must fit easily into the developers workflow. As
+\subsection{{\em de Novo} Build Environments} 
+ 
+A service such as this must require minimal developer intervention.
+This serves multiple purposes -- through automation for example, the
+service can be enabled to compile new code and test new benchmarks
+trivially. This also forces the developer to make local workarounds or
+hacks publicly viewable. As such, this requires the developer to make
+the project dependencies clearly available, and enables future changes
+in the dependencies (such as a library update) to be tested
+automatically too.
+
+Throughout the lifetime of the BMA development has been shared between a 
+number of developers, working on different aspects of the tool. Work in 
+algorithm development~\cite{cook2014,piterman2013} focuses on adding 
+new features to a command line tool with few dependencies, aiding rapid 
+development. In contrast, the graphical model construction and testing 
+environment has typically been done by a single or pair of individuals. 
+This necessarily required a number of dependencies, reflecting the use
+of Azure and Silverlight.
+
+In an early stage of development it was found that only a single machine 
+was capable of deploying the web service. This arose as the developer 
+responsible for writing and deploying the user interface had run a series
+of commands necessary to run the mixture of 64- and 32- bit components on
+Azure. These commands needed only be run once, and went undocumented, and 
+needed to be rediscovered later when other team members attemped to deploy.
+These problems would be identified trivially through the proposed service;
+such undocumented commands would lead to all tests failing until added to 
+the build process.
+
+\subsection{There are two types of people} 
+The service must fit easily into the developers workflow. As
 noted in section~\ref{rollout} we expect that there will be some costs
 to the users in terms of the time required to ensure that the code
 compiles and runs on the service. To minimise this, the service needs
@@ -200,10 +241,31 @@ tested for a known property, and the results recorded. These results
 can then be stored in a database, with a note of the commit ID, and
 available through a web interface for future analysis.
 
+\subsection{Tool Refinement}
+
 In contrast to the developer role, a modeller supplies benchmarks for
 a piece of code to test. These do not require that the latest version
 of the code is recompiled, but on submission the models are tested and
-added to the local repository of models for analysis. After a model is
+added to the local repository of models for analysis. 
+
+In the case of BMA, throughout the development of the tool, many
+refinements have been made to different implementations. Some of these
+were subtle, and were identified by unit tests; for example rounding
+mechanisms were switched between floors and rounds following a
+scientific discussion. More complex changes however broke behaviours
+which were not tested in our available benchmark set. One example was
+in the treatments with of nodes without inputs- ``biological
+intuition'' suggested that such nodes should have an alternative
+default function from other nodes. Here, the ability of users to
+submit new benchmarks would aid identification of these breaking
+changes, by extending the test sets and simplifying the process of
+adding to the test sets, and forcing the question of what changes are
+appropriate (and how to update old models to keep correct behaviour).
+
+
+\subsection{Identification of Algorithmic Weaknesses}
+
+After a model is
 submitted, the model is tested on every new piece of code pushed to
 the server and the changes in the behaviour can be noted and linked to
 specific code commits. Whilst the developers role has a transparent
@@ -212,11 +274,28 @@ the modeller may be less immediately clear. The modeller submits a
 broad range of tests which may highlight material flaws (i.e. bugs) in
 the implementation, or the algorithm. More than this however, the
 modeller may generate models which identify weaknesses of either an
-algorithm or an implementation. One example from the authors
-experience is the series of models with ``timed-switches'' described
-in \cite{cook2014}; this is discussed in greater depth below in
-section~\ref{example}.
+algorithm or an implementation. 
 
+One example from the authors experience is the series of models with
+``timed-switches'' described in \cite{cook2014}. There, we presented a
+new algorithm for proving stability in a new class of models. Whilst
+the paper focused on discussing the algorithm, identifying the new
+class of models was complex. Models with long cycles and the new class
+of models (``non-trivially stable models'') both can take substantial
+time to search for cycles, and these models could only be proved
+stable using a combination of simulation (to identify the fix-point)
+and LTL queries (to prove that there existed no paths beyond a certain
+length which did not include the fix-point)~\cite{piterman2013}.
+
+\subsection{Algorithm--Model axes}
+The proposed service would allow both types of test to be included explicitly,
+and models to be routinely added to each algorithm. Models which time-out with 
+one but are successfully proved can be logged and identified for future study.
+The features which define them would be more easily found, and new algorithms
+developed to address the specific features of the model. It could further be 
+used to demonstrate the speed improvement arising from new algorithms.
+
+\subsection{Depends}
 Finally, dependencies for a given implementation need explicit
 testing. Due to the highly variable and sometimes complex nature of
 dependencies, we see this as an optional part of the workflow, as
@@ -287,67 +366,7 @@ affordable journal) that a shift to becoming exclusively open access
 may lead to a ten-fold increase in computer science publication
 costs~\cite{vardi-cacm-2014}. 
 
-\section{Example case study: BioModelAnalyzer}\label{example}
 
-% NEEDS WORK!
-% IDEA: pick one of Samin's CAV papers (BMA?) and run it through the
-% process and see what happens.
-
-The
-BioModelAnalyzer\footnote{\url{http://biomodelanalyzer.research.microsoft.com/}}
-(BMA) is a tool for the development and analysis of a specific class of
-formal models for
-biology~\cite{benque2012,cook-et-al:2010,cook2014}. Models are built
-by biologists in a web browser and are explored at present by a
-combination of simulation and model checking. The tool specifically
-allows users to test for model \emph{stability}; that is, a bespoke
-algorithm proves that for all initial states a model always ends in a
-single fixpoint. We have chosen this example due to our familiarity
-with the tool, and to highlight historical examples where a
-reproducibility service would have supported both code development and
-algorithm discovery.
-
-The benefits for reproducibility testing for a service are clear. In a sense,
-reproducibility here is an extension of the standard practice of \emph{testing}.
-Three features distinguish our aims for reproducibility here: compilation and testing
-in a new machine, a continuous integration strategy for code commits, and 
-the ability to add and remove benchmarks to the test set.
-
-\subsection{\emph{de novo} Build Environments}
-
-Throughout the lifetime of the BMA development has been shared between a 
-number of developers, working on different aspects of the tool. Work in 
-algorithm development~\cite{cook2014,piterman2013} focuses on adding 
-new features to a command line tool with few dependencies, aiding rapid 
-development. In contrast, the graphical model construction and testing 
-environment has typically been done by a single or pair of individuals. 
-This necessarily required a number of dependencies, reflecting the use
-of Azure and Silverlight.
-
-In an early stage of development it was found that only a single machine 
-was capable of deploying the web service. This arose as the developer 
-responsible for writing and deploying the user interface had run a series
-of commands necessary to run the mixture of 64- and 32- bit components on
-Azure. These commands needed only be run once, and went undocumented, and 
-needed to be rediscovered later when other team members attemped to deploy.
-These problems would be identified trivially through the proposed service;
-such undocumented commands would lead to all tests failing until added to 
-the build process.
-
-\subsection{Tool Refinement}
-
-Throughout the development of the tool, many refinements have been made 
-to different implementations. Some of these were subtle, and were  
-identified by unit tests; for example rounding mechanisms were switched
-between floors and rounds following a scientific discussion. More complex
-changes however broke behaviours which were not tested in our available 
-benchmark set. One example was in the treatments with of nodes without
-inputs- ``biological intuition'' suggested that such nodes should have
-an alternative default function from other nodes. Here, the ability of 
-users to submit new benchmarks would aid identification of these breaking
-changes, by extending the test sets and simplifying the process of adding
-to the test sets, and forcing the question of what changes are appropriate
-(and how to update old models to keep correct behaviour).
 
 %skip this section? It just repeats the same problem as above
 %Modelling reveals untested issues: range conversion
@@ -356,24 +375,6 @@ to the test sets, and forcing the question of what changes are appropriate
 %and explicit implementations of range conversion)
 %Service would- allow external users to add new benchmarks, which would make it
 %easier to catch these issues
-
-\subsection{Identification of Algorithmic Weaknesses}
-
-In~\cite{cook2014} we presented a new algorithm for proving stability in 
-a new class of models. Whilst the paper focused on discussing the algorithm,
-identifying the new class of models was complex. Models with long cycles 
-and the new class of models (``non-trivially stable models'') both can take
-substantial time to search for cycles, and these models could only be proved
-stable using a combination of simulation (to identify the fix-point) and LTL
-queries (to prove that there existed no paths beyond a certain length which 
-did not include the fix-point)~\cite{piterman2013}. 
-
-The proposed service would allow both types of test to be included explicitly,
-and models to be routinely added to each algorithm. Models which time-out with 
-one but are successfully proved can be logged and identified for future study.
-The features which define them would be more easily found, and new algorithms
-developed to address the specific features of the model. It could further be 
-used to demonstrate the speed improvement arising from new algorithms.
 
 % Worked example of how issues could be highlighted and found over time: perhaps
 % another figure? linking code changes to discoveries could be drawn as a timeline. The 
