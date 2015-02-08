@@ -149,17 +149,16 @@ distinguish our aims for reproducibility here: compilation and testing
 in a new machine, a continuous integration strategy for code commits,
 and the ability to add and remove benchmarks to the test set.
 
-We have a running example based upon a previously accepted CAV paper
-(***ref?)  on the BioModelAnalyzer (BMA) by the authors.
-BMA\footnote{\url{http://biomodelanalyzer.research.microsoft.com/}} is
-a tool for the development and analysis (simulation, model checking)
-of a specific class of formal models for
-biology~\cite{benque2012,cook-et-al:2010,cook2014}. The tool
-specifically allows users to test for model \emph{stability}; that is,
-a bespoke algorithm proves that for all initial states a model always
-ends in a single fixpoint. We have chosen this example due to our
-familiarity with the tool, and to highlight historical examples where
-a reproducibility service would have supported both toolchain
+We have a running example based upon the BioModelAnalyzer (BMA) tool,
+which has been described by the authors over a series of VMCAI and CAV
+papers~\cite{benque2012,cook-et-al:2010,cook2014}.  BMA is a tool for
+the development and analysis (simulation, model checking) of a
+specific class of formal models for biology. The tool specifically
+allows users to test for model \emph{stability}; that is, a bespoke
+algorithm proves that for all initial states a model always ends in a
+single fixpoint. We have chosen this example due to our familiarity
+with the tool, and to highlight historical examples where a
+reproducibility service would have supported both toolchain
 development and algorithm discovery.
 
 
