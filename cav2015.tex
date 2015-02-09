@@ -53,10 +53,6 @@ software.
 % Verification
 % Validation
 
-% TO DO:
-% consistency of artefact (UK) vs. artifact (US)...
-% fix missing refs
-% trim to six pages!
 
 \section{Introduction}\label{intro}
 
@@ -73,24 +69,24 @@ software.
 %% \end{quotation}
  
 This is not a theory paper or a tool paper, nor an industrial case
-study. The aim of this paper is to start a discussion in the CAV
-community about the reproducibility of algorithms, models, tools and
-benchmarks across the computer-aided formal analysis and verification
-research domain. There is a significant opportunity for the CAV
-community to identify and address the technical and socio-cultural
-issues surrounding reproducibility in both the cognate research domain
-as well as more broadly for computing science; a desirable outcome
-would be a clear specification to encourage, enable and enforce
-reproducibility. Enumerating a standard for reproducibility would have
-a clear benefit for researchers as well as the CAV community as a
-whole.
+study. The primary aim of this paper is to start a discussion in the
+CAV community about the reproducibility of algorithms, models, tools
+and benchmarks across the computer-aided formal analysis and
+verification research domain. There is a significant opportunity for
+the CAV community to identify and address the technical and
+socio-cultural issues surrounding reproducibility in both the cognate
+research domain as well as more broadly for computer science; a
+desirable outcome would be a clear specification to encourage, enable
+and enforce reproducibility. Enumerating a standard for
+reproducibility would have a clear benefit for researchers as well as
+the CAV community as a whole.
 
 We recognise that we do not need to sell the idea of reproducibility
 to the CAV community too much: we are used to writing papers about our
-algorithms, models and tools; and reproducing others' work, or having
-our own work reproduced, are encapsulated in the ``Benchmark Tables''
-that CAV authors and referees both think are essential to the
-papers. But the idea of reproducibility is gaining momentum in the wider
+algorithms, models and tools; and reproducing others' work (or having
+our own work reproduced) is encapsulated in the ``Benchmark Tables''
+that CAV authors and referees both think are essential to any
+paper. But the idea of reproducibility is gaining momentum in the wider
 scientific community as well, for example in computer
 science~\cite{collberg-et-al:2014}, life
 sciences~\cite{rollins-et-al:2014},
@@ -101,39 +97,36 @@ the subsequent discussions relating to the sharing of protocols and
 materials (\emph{open science}). But the ability of a researcher to
 take published results and data and reimplement the described workflow
 remains
-difficult~\cite{stodden-et-al:2013,sandve-et-al:2013,wilson-et-al:2014},
-\footnote{Retraction Watch: Tracking retractions as a window into the
-scientific process\\\url{http://retractionwatch.com/}}.  
+difficult~\cite{peng:2011,sandve-et-al:2013,wilson-et-al:2014}.  
 We have
 previously documented some of the technical and cultural barriers to
 reproducing work across computing and the computational sciences, both
 in terms of the sharing of algorithms~\cite{crick-et-al_recomp2014}
 and models and benchmark sets~\cite{crick-et-al_wssspe2}.
 
-SI: genuinely too many footnotes here. I don't think it's necessary to give citations for these? 
+% Removed footnotes:
+% \footnote{Retraction Watch: Tracking retractions as a window into the scientific process\\\url{http://retractionwatch.com/}}
+% SIGMOD: \footnote{\url{http://db-reproducibility.seas.harvard.edu/}}
+% CGO: \footnote{\url{http://ctuning.org/cm/wiki/index.php?title=Reproducibility:AE:CGO2015}}
+% SPLASH: \footnote{\url{http://2014.splashcon.org/track/splash2014-artifacts}}
+% PPoPP: \footnote{\url{http://ctuning.org/cm/wiki/index.php?title=Reproducibility:AE:PPoPP2015}}
+% TRUST (PLDI): \footnote{\url{http://ctuning.org/cm/wiki/index.php?title=Events:TRUST2014}}
+% ADAPT (HiPEAC): \footnote{\url{http://www.adapt-workshop.org/}}
 
-A number of computer science conferences, including ACM
-SIGMOD\footnote{\url{http://db-reproducibility.seas.harvard.edu/}},
-CGO\footnote{\url{http://ctuning.org/cm/wiki/index.php?title=Reproducibility:AE:CGO2015}},
-SPLASH
-(OOPSLA)\footnote{\url{http://2014.splashcon.org/track/splash2014-artifacts}},
-PPoPP\footnote{\url{http://ctuning.org/cm/wiki/index.php?title=Reproducibility:AE:PPoPP2015}},
-TRUST\footnote{\url{http://ctuning.org/cm/wiki/index.php?title=Events:TRUST2014}}
-(PLDI) and ADAPT\footnote{\url{http://www.adapt-workshop.org/}}
-(HiPEAC), now explicitly acknowledge the importance of reproducibility
-(and repeatability, recomputability and the multitude of `Rs' that
-underpin e-research).  For many --- like CAV this year --- this takes
-the form of the author providing some \emph{artefacts} (an accessible
-tool for reproducing results) to evaluate. Journals such as Nature,
-PLoS Computational Biology and Bioinformatics explicitly require that
-source code and data is made available online under some form of open
-source license. While these initiative are great, they are often
-optional, seem piecemeal, and do little to enable verification or
-validation of scientific results at a later stage. Even within the
-same field, there are different ideas of what defines
-reproducibility. An open discussion and understanding of would be
-desirable is good for the community: we need to explicitly state that
-this is important and address it, or don't bother doing it at all.
+A number of high-profile computer science conferences, including ACM
+SIGMOD, CGO, SPLASH (OOPSLA) and ECAI, now explicitly acknowledge the
+importance of reproducibility (and repeatability, recomputability and
+the multitude of `Rs' that underpin e-research), as well as promoting
+community-driven reviewing and validation~\cite{fursin+dubach:2014}.
+For many --- like CAV this year --- this takes the form of the author
+providing \emph{artefacts} (an accessible tool for reproducing
+results) to evaluate. Journals such as Nature, PLoS Computational
+Biology and Bioinformatics explicitly require that source code and
+data is made available online under some form of open source
+license. While these initiative are great, they are often optional,
+seem piecemeal, and do little to enable verification or validation of
+scientific results at a later stage. Even within the same field, there
+are different ideas of what defines reproducibility.
 
 This paper is thus a ``Call to Action'', inviting CAV practitioners to
 embrace a new methodology for disseminating research. Practically, we
@@ -151,14 +144,14 @@ and the ability to add and remove benchmarks to the test set.
 
 We have a running example based upon the BioModelAnalyzer (BMA) tool,
 which has been described by the authors over a series of VMCAI and CAV
-papers~\cite{benque2012,cook-et-al:2010,cook2014}.  BMA is a tool for
-the development and analysis (simulation, model checking) of a
-specific class of formal models for biology. The tool specifically
-allows users to test for model \emph{stability}; that is, a bespoke
-algorithm proves that for all initial states a model always ends in a
-single fixpoint. We have chosen this example due to our familiarity
-with the tool, and to highlight historical examples where a
-reproducibility service would have supported both toolchain
+papers~\cite{cook-et-al:2011,benque-et-al:2012,cook-et-al:2014}.  BMA
+is a tool for the development and analysis (simulation, model
+checking) of a specific class of formal models for biology. The tool
+specifically allows users to test for model \emph{stability}; that is,
+a bespoke algorithm proves that for all initial states a model always
+ends in a single fixpoint. We have chosen this example due to our
+familiarity with the tool, and to highlight historical examples where
+a reproducibility service would have supported both toolchain
 development and algorithm discovery.
 
 
@@ -188,14 +181,14 @@ the project dependencies clearly available, and enables future changes
 in the dependencies (such as a library update) to be tested
 automatically too.
 
-Throughout the lifetime of BMA, development has been shared between a 
-number of developers, working on different aspects of the tool. Work in 
-algorithm development~\cite{cook2014,piterman2013} focuses on adding 
-new features to a command line tool with few dependencies, aiding rapid 
-development. In contrast, the graphical model construction and testing 
-environment has typically been done by a single or pair of individuals. 
-This necessarily required a number of dependencies, reflecting the use
-of Azure (Microsoft's cloud computing platform) and Silverlight (a
+Throughout the lifetime of BMA, development has been shared between a
+number of developers, working on different aspects of the tool. Work
+in algorithm development focuses on adding new features to a command
+line tool with few dependencies, aiding rapid development. In
+contrast, the graphical model construction and testing environment has
+typically been done by a single or pair of individuals.  This
+necessarily required a number of dependencies, reflecting the use of
+Azure (Microsoft's cloud computing platform) and Silverlight (a
 framework for rich Internet applications).
 
 In an early stage of development it was found that only a single
@@ -284,7 +277,7 @@ however, the modeller may generate models which identify weaknesses of
 either an algorithm or an implementation.
 
 One example from the authors experience is the series of models with
-``timed-switches'' described in \cite{cook2014}. There, we presented a
+``timed-switches'' described in~\cite{cook-et-al:2014}. There, we presented a
 new algorithm for proving stability in a new class of models. Whilst
 the paper focused on discussing the algorithm, identifying the new
 class of models was complex. Models with long cycles and the new class
@@ -394,8 +387,6 @@ publication costs~\cite{vardi-cacm-2014}).
 % proposed output of the hypothetical service could be indicated alongside it, 
 % demonstrating how the service would have supported the work.
 
-% should this be merged into the section above? Cite Fursin et al.
-% Problem: getting people to do it? Carrot/stick...
 
 \section{Conclusions}\label{concl}
 
@@ -413,16 +404,19 @@ within the community, and would reduce the activation energy for
 uptake by gradually introducing it to authors.
 
 \begin{description}
-\item[Year 1:] Offer the service as an optional extra in the testing phase, allowing users to demonstrate 
+\item[CAV 2016:] Offer the service as an optional extra in the testing phase, allowing users to demonstrate 
 the reliability of their code which could be taken into account in the review process.
-\item[Year 2:] All authors must use the reproducibility service, but results are not used in the review
+\item[CAV 2017:] All authors must use the reproducibility service, but results are not used in the review
 process. The results of the test are used to refine the service and pick out any unaddressed issues
-\item[Year 3:] All authors are required to use the service, and the results are explicitly used to 
+\item[CAV 2018:] All authors are required to use the service, and the results are explicitly used to 
 assess reproducibility in the review process.
 \end{description}
 
 We thus propose that this should be trialled for CAV in 2016, with a
-three year schedule for universal adoption in future instances.
+three year schedule for universal adoption in future instances. An
+open discussion and understanding of would be desirable is good for
+the community: we need to explicitly state that this is important and
+address it, or don't bother doing it at all.
 
 \bibliographystyle{splncs}
 \bibliography{cav2015}
