@@ -118,15 +118,15 @@ SIGMOD, CGO, SPLASH (OOPSLA) and ECAI, now explicitly acknowledge the
 importance of reproducibility (and repeatability, recomputability and
 the multitude of `Rs' that underpin e-research), as well as promoting
 community-driven reviewing and validation~\cite{fursin+dubach:2014}.
-For many --- like CAV this year --- this takes the form of the author
-providing \emph{artefacts} (an accessible tool for reproducing
-results) to evaluate. Journals such as Nature, PLoS Computational
-Biology and Bioinformatics explicitly require that source code and
-data is made available online under some form of open source
-license. While these initiative are great, they are often optional,
-seem piecemeal, and do little to enable verification or validation of
-scientific results at a later stage. Even within the same field, there
-are different ideas of what defines reproducibility.
+For many --- the first time for CAV this year --- this takes the form
+of the author providing \emph{artefacts} (an accessible tool for
+reproducing results) to evaluate. Journals such as Nature, PLoS
+Computational Biology and Bioinformatics explicitly require that
+source code and data is made available online under some form of open
+source license. While these initiative are great, they are often
+optional, seem piecemeal, and do little to enable verification or
+validation of scientific results at a later stage. Even within the
+same field, there are different ideas of what defines reproducibility.
 
 This paper is thus a ``Call to Action'', inviting CAV practitioners to
 embrace a new methodology for disseminating research. Practically, we
@@ -142,17 +142,19 @@ distinguish our aims for reproducibility here: compilation and testing
 in a new machine, a continuous integration strategy for code commits,
 and the ability to add and remove benchmarks to the test set.
 
-We have a running example based upon the BioModelAnalyzer (BMA) tool,
-which has been described by the authors over a series of VMCAI and CAV
-papers~\cite{cook-et-al:2011,benque-et-al:2012,cook-et-al:2014}.  BMA
-is a tool for the development and analysis (simulation, model
+We have a running example based upon the BioModelAnalyzer
+(BMA)\footnote{\url{http://biomodelanalyzer.research.microsoft.com/}}
+tool, which has been described by the authors over a series of VMCAI
+and CAV
+papers~\cite{cook-et-al:2011,benque-et-al:2012,cook-et-al:2014}.
+BMA is a tool for the development and analysis (simulation, model
 checking) of a specific class of formal models for biology. The tool
-specifically allows users to test for model \emph{stability}; that is,
-a bespoke algorithm proves that for all initial states a model always
-ends in a single fixpoint. We have chosen this example due to our
-familiarity with the tool, and to highlight historical examples where
-a reproducibility service would have supported both toolchain
-development and algorithm discovery.
+specifically allows users to test for model \emph{stability}; that
+is, a bespoke algorithm proves that for all initial states a model
+always ends in a single fixpoint. We have chosen this example due to
+our familiarity with the tool, and to highlight historical examples
+where a reproducibility service would have supported both
+toolchain development and algorithm discovery.
 
 
 
@@ -175,8 +177,8 @@ roles. It should:
 A service such as this must require minimal developer intervention.
 This serves multiple purposes -- through automation for example, the
 service can be enabled to compile new code and test new benchmarks
-trivially. This also forces the developer to make local workarounds or
-hacks publicly viewable. As such, this requires the developer to make
+trivially. This also forces the developer to make publicly available their
+local workarounds (=hacks). As such, this requires the developer to make
 the project dependencies clearly available, and enables future changes
 in the dependencies (such as a library update) to be tested
 automatically too.
@@ -272,7 +274,7 @@ linked to specific code commits. Whilst the developer's role has a
 transparent value (in providing an implementation of an algorithm),
 the value of the modeller may be less immediately clear. The modeller
 submits a broad range of tests which may highlight material flaws
-(i.e. bugs) in the implementation, or the algorithm. More than this
+(= bugs) in the implementation, or the algorithm. More than this
 however, the modeller may generate models which identify weaknesses of
 either an algorithm or an implementation.
 
@@ -296,7 +298,7 @@ The features which define them would be more easily found, and new algorithms
 developed to address the specific features of the model. It could further be 
 used to demonstrate the speed improvement arising from new algorithms.
 
-\subsection{Depends}
+\subsection{make depend}
 
 Dependencies for a given implementation need explicit
 testing. Due to the highly variable and sometimes complex nature of
@@ -308,28 +310,37 @@ triggering compilation and testing in the same manner as defined for a
 new code commit. This would aid developers in identifying code
 breaking changes introduced by third parties.
 
+\subsection{``I'm first!''}
+
+Another issue is around performance comparisons of benchmarks: how can
+we estimate and compare raw performance in the cloud? Testing new
+algorithms on benchmarks is first about pass/fail, but very soon, when
+the rubber hits the road, it's about raw performance. Benchmark tables
+are about beating other algorithms, other tools. But, if the whole
+verification workflow is running on the cloud, then acquiring raw
+performance numbers is not possible any more. There is no cloud
+equivalent of ``top'' or ``time'' that gives user -- resource
+statistics. There is too much infrastructure interference --- with VMs
+spinning up, being torn down, migrating, the bus being used by other
+VMs, etc --- to obtain faithful numbers for the user -- process -- VM
+itself. Projects such as
+{\emph{Recomputation.org}}\footnote{\url{http://recomputation.org/}}
+have been focusing on using virtual machines in the cloud to freeze,
+and later unfreeze, computational experiments; while this approach is
+not the whole solution, it is certainly a move in the right
+direction~\cite{arabas-et-al:2014}. Nevertheless, the project's
+primary aim is to validate recomputation, with performance a secondary
+consideration~\cite{gent:2013}. This is one aspect of this proposal
+that needs further investigating.
 
 \subsection{Run any code in any environment}
 
-% How best to secure a service which compiles and runs arbitrary code on
-% arbitrary inputs?
 There are clearly security concerns around providing open
 e-infrastructure that pulls, compiles and runs arbitrary
-code as an autonomous continuous integration framework...
-
-\subsection{Cloud performance}
-
-Another issue is around performance comparisons of benchmarks from
-cloud computations: how can we estimate and compare raw performance in
-the cloud? While there has been some work on verifying computations
-without reexecuting them~\cite{walfish+blumberg:2015}, projects such
-as Recomputation.org\footnote{\url{http://recomputation.org/}} have
-been focusing on using virtual machines in the cloud to freeze, and
-later unfreeze, computational experiments. While this approach is not
-the whole solution, it is certainly a move in the right
-direction~\cite{arabas-et-al:2014}. Nevertheless, the project's
-primary aim is to validate recomputation, with performance a secondary
-consideration~\cite{gent:2013}.
+code as an autonomous continuous integration framework; we need to
+consider precisely how this infrastructure would interact with other
+open services, as well as privileges it would require to run as an
+autonomous cloud service.
 
 
 %\section{Introducing reproducibility testing to the community}\label{rollout}
