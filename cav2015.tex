@@ -296,7 +296,7 @@ The features which define them would be more easily found, and new algorithms
 developed to address the specific features of the model. It could further be 
 used to demonstrate the speed improvement arising from new algorithms.
 
-\subsection{Depends}
+\subsection{make depend}
 
 Dependencies for a given implementation need explicit
 testing. Due to the highly variable and sometimes complex nature of
@@ -312,7 +312,21 @@ breaking changes introduced by third parties.
 \subsection{Run any code in any environment}
 How best to secure a service which compiles and runs arbitrary code on arbitrary inputs?
 
-\subsection{Cloud performance}
+\subsection{I'm first}
+
+Testing new algorithms on benchmarks is first about pass/fail, but
+very soon, when the rubber hits the road, it's about raw
+performance. Benchmark tables are about beating other algorithms,
+other tools. But, if the whole verification workflow is running on the
+cloud, then acquiring raw performance numbers is not possible any
+more. There is no Cloud equivalent of ``top'' or ``time'' that gives
+user--resource statistics. There is too much infrastructure
+interference --- with VMs spinning up, being torn down, migrating, the
+bus being used by other VMs, etc --- to obtain faithful numbers for
+the user--process--VM itself. This is one aspect of this proposal that
+needs further investigating. 
+
+
 How to estimate raw performance on the cloud?
 
 %\section{Introducing reproducibility testing to the community}\label{rollout}
