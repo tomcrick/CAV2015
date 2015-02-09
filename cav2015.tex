@@ -157,19 +157,19 @@ where a reproducibility service would have supported both
 toolchain development and algorithm discovery.
 
 
-
 \section{A specification for reproducible computational science}\label{spec}
 
 A service for reproducibility is intended to play three important
 roles. It should:
 
 \begin{enumerate}
-	\item Demonstrate that a piece of code can be compiled, run and behaves as described,
-		without manual intervention from the developer.
-	\item Store and link specific artefacts with their linked publications
-		or other publicly-accessible datasets.
-	\item Allow new benchmarks to be added, by users other than the developer, to
-		widen the testing and identify potential bugs.
+\item Demonstrate that a piece of code can be compiled, run
+and behaves as described, without manual intervention from the
+developer.
+\item Store and link specific artefacts with their linked
+publications or other publicly-accessible datasets.
+\item Allow new benchmarks to be added, by users other than
+the developer, to widen the testing and identify potential bugs.
 \end{enumerate}
 
 \subsection{{\em de Novo} build environments}
@@ -177,11 +177,11 @@ roles. It should:
 A service such as this must require minimal developer intervention.
 This serves multiple purposes -- through automation for example, the
 service can be enabled to compile new code and test new benchmarks
-trivially. This also forces the developer to make publicly available their
-local workarounds (i.e. hacks). As such, this requires the developer to make
-the project dependencies clearly available, and enables future changes
-in the dependencies (such as a library update) to be tested
-automatically too.
+trivially. This also forces the developer to make publicly available
+their local workarounds (i.e. hacks). As such, this requires the
+developer to make the project dependencies clearly available, and
+enables future changes in the dependencies (such as a library update)
+to be tested automatically too.
 
 Throughout the lifetime of BMA, development has been shared between a
 number of developers, working on different aspects of the tool. Work
@@ -279,52 +279,53 @@ however, the modeller may generate models which identify weaknesses of
 either an algorithm or an implementation.
 
 One example from the authors experience is the series of models with
-``timed-switches'' described in~\cite{cook-et-al:2014}. There, we presented a
-new algorithm for proving stability in a new class of models. Whilst
-the paper focused on discussing the algorithm, identifying the new
-class of models was complex. Models with long cycles and the new class
-of models (``non-trivially stable models'') both can take substantial
-time to search for cycles, and these models could only be proved
-stable using a combination of simulation (to identify the fix-point)
-and LTL queries (to prove that there existed no paths beyond a certain
-length which did not include the fix-point)~\cite{claessen-et-al:2013}.
+``timed-switches'' described in~\cite{cook-et-al:2014}. There, we
+presented a new algorithm for proving stability in a new class of
+models. Whilst the paper focused on discussing the algorithm,
+identifying the new class of models was complex. Models with long
+cycles and the new class of models (``non-trivially stable models'')
+both can take substantial time to search for cycles, and these models
+could only be proved stable using a combination of simulation (to
+identify the fix-point) and LTL queries (to prove that there existed
+no paths beyond a certain length which did not include the
+fix-point)~\cite{claessen-et-al:2013}.
 
 \subsection{Algorithm--model axes}
 
-The proposed service would allow both types of test to be included explicitly,
-and models to be routinely added to each algorithm. Models which time-out with
-one but are successfully proved can be logged and identified for future study.
-The features which define them would be more easily found, and new algorithms
-developed to address the specific features of the model. It could further be
-used to demonstrate the speed improvement arising from new algorithms.
+The proposed service would allow both types of test to be included
+explicitly, and models to be routinely added to each algorithm. Models
+which time-out with one but are successfully proved can be logged and
+identified for future study.  The features which define them would be
+more easily found, and new algorithms developed to address the
+specific features of the model. It could further be used to
+demonstrate the speed improvement arising from new algorithms.
 
-\subsection{make depend}
+\subsection{{\texttt{makedepend}}}
 
-Dependencies for a given implementation need explicit
-testing. Due to the highly variable and sometimes complex nature of
-dependencies, we see this as an optional part of the workflow, as
-developers may chose to supply dependencies as binary files in the
-code compilation process. For completeness however we note that such a
-system could also respond to updates in external dependencies by
-triggering compilation and testing in the same manner as defined for a
-new code commit. This would aid developers in identifying code
-breaking changes introduced by third parties.
+Dependencies for a given implementation need explicit testing. Due to
+the highly variable and sometimes complex nature of dependencies, we
+see this as an optional part of the workflow, as developers may chose
+to supply dependencies as binary files in the code compilation
+process. For completeness however we note that such a system could
+also respond to updates in external dependencies by triggering
+compilation and testing in the same manner as defined for a new code
+commit. This would aid developers in identifying code breaking changes
+introduced by third parties.
 
 \subsection{``I'm first!''}
 
 Another issue is around performance comparisons of benchmarks: how can
 we estimate and compare raw performance in the cloud? Testing new
-algorithms on benchmarks is first about pass/fail, but very soon, when
-the rubber hits the road, it's about raw performance. Benchmark tables
-are about beating other algorithms, other tools. But, if the whole
-verification workflow is running on the cloud, then acquiring raw
-performance numbers is not possible any more. There is no cloud
-equivalent of ``top'' or ``time'' that gives user -- resource
-statistics. There is too much infrastructure interference --- with VMs
-spinning up, being torn down, migrating, the bus being used by other
-VMs, etc --- to obtain faithful numbers for the user -- process -- VM
-itself. Projects such as
-{\emph{Recomputation.org}}\footnote{\url{http://recomputation.org/}}
+algorithms on benchmarks is first about pass/fail, but very soon it's
+about raw performance. Benchmark tables are about beating other
+algorithms, other tools. But, if the whole verification workflow is
+running on the cloud, then acquiring raw performance numbers is not
+possible any more. There is no cloud equivalent of {\texttt{top}} or
+{\texttt{time}} that gives user -- resource statistics. There is too
+much infrastructure interference --- with VMs spinning up, being torn
+down, migrating, the bus being used by other VMs, etc --- to obtain
+faithful numbers for the user -- process -- VM itself. Projects such
+as Recomputation.org\footnote{\url{http://recomputation.org/}}
 have been focusing on using virtual machines in the cloud to freeze,
 and later unfreeze, computational experiments; while this approach is
 not the whole solution, it is certainly a move in the right
@@ -356,36 +357,41 @@ after such a service has been implemented, how do we ensure it is
 propose the following workflow for CAV:
 
 % workflow
-\begin{description}
-\item[Pre-conference:] clear signposting for authors; it should be
-advertised and promoted in the CAV call for papers to highlight this
-is a step-change in how we address reproducibility. Call for artefact
-reviewers with a range of specialisms, with a named chair of the review team.
-\item[Explicit criteria for authors:] {\emph{make this as
+\begin{enumerate}
+\item {\textbf{Pre-conference:}} clear signposting for authors; it
+should be advertised and promoted in the CAV call for papers to
+highlight this is a step-change in how we address
+reproducibility. Call for artefact reviewers with a range of
+specialisms, with a named chair of the review team.
+\item {\textbf{Explicit criteria for authors:}} {\emph{make this as
 easy as possible for us to evaluate/execute your artefact!}}. We would
-aim to articulate the review criteria, but the primary aim is: {\emph{can I evaluate/execute this
-  artefact and get the same results that are presented in the paper?}}
-\item[Submission:] when papers are submitted, they have to nominate whether they
-  want their paper to go through artefact review (at the start, this
-  may not be compulsory, but this will change over a period of
-time -- effecting cultural change and this would then become a
-necessary condition and a formal stage in the reviewing workflow),
-  along with required tools, libraries and (ideally) computational requirements.
-\item[Reviewing]: in the first instance, it may be seen as an extra
-(voluntary) step to the normal reviewing process: e.g. {\emph{This
-submission is voluntary and will not influence the final decision
-regarding the papers.}}. Independent of the scientific merit of the
-paper, the results will be verified. To encourage this, there may be a
-prize, as well as ranked ordering and listed in conference proceedings
-(seal of approval?).
-\item[Artefact evaluation:] artefact evaluation process runs concurrent to the
-  standard paper review process.
-\item[Reporting:] traffic lights system (ranked list?) to indicate the level of
-  reproducibility of the submitted artefact.
-\item[Community curation:] over a number of CAV cycles, we would have a
-  community curated repository/database of previous artefacts, which
-  would provide exemplars, comparisons and emerging best practice.
-\end{description}
+aim to articulate the review criteria, but the primary aim is:
+{\emph{can I evaluate/execute this artefact and get the same results
+that are presented in the paper?}}
+\item {\textbf{Submission:}} when papers are submitted, they have to
+nominate whether they want their paper to go through artefact review
+(at the start, this may not be compulsory, but this will change over a
+period of time -- effecting cultural change and this would then become
+a necessary condition and a formal stage in the reviewing workflow),
+along with required tools, libraries and (ideally) computational
+requirements.
+\item {\textbf{Reviewing:}} in the first instance, it may be seen as
+an extra (voluntary) step to the normal reviewing process:
+e.g. {\emph{This submission is voluntary and will not influence the
+final decision regarding the papers.}}. Independent of the scientific
+merit of the paper, the results will be verified. To encourage this,
+there may be a prize, as well as ranked ordering and profiled listed
+in conference proceedings.
+\item {\textbf{Artefact evaluation:}} artefact evaluation process runs
+concurrent to the standard paper review process.
+\item {\textbf{Reporting:}} traffic lights system (potentially with
+ranked list) to indicate the level of reproducibility of the submitted
+artefact.
+\item {\textbf{Community curation:}} over a number of CAV cycles, we
+would have a community curated repository/database of previous
+artefacts, which would provide exemplars, comparisons and emerging
+best practice.
+\end{enumerate}
 
 The key question for different research communities then becomes:
 {\emph{how to initialise this change?}} Such a requirement creates a
@@ -401,19 +407,6 @@ analysis is not unique to reproducibility efforts -- it has been
 estimated that a shift to becoming exclusively open access for a
 journal may lead to a ten-fold increase in computer science
 publication costs~\cite{vardi-cacm-2014}).
-
-%skip this section? It just repeats the same problem as above
-%Modelling reveals untested issues: range conversion
-%(no original benchmarks had range conversion- new benchmarks did
-%and showed unexpected behaviour, including a mismatch between symbolic
-%and explicit implementations of range conversion)
-%Service would- allow external users to add new benchmarks, which would make it
-%easier to catch these issues
-
-% Worked example of how issues could be highlighted and found over time: perhaps
-% another figure? linking code changes to discoveries could be drawn as a timeline. The
-% proposed output of the hypothetical service could be indicated alongside it,
-% demonstrating how the service would have supported the work.
 
 
 \section{Conclusions}\label{concl}
@@ -432,12 +425,15 @@ within the community, and would reduce the disruption for uptake by
 gradually introducing it to researchers.
 
 \begin{description}
-\item[CAV 2016:] Offer the service as an optional extra in the testing phase, allowing users to demonstrate
-the reliability of their code which could be taken into account in the review process.
-\item[CAV 2017:] All authors must use the reproducibility service, but results are not used in the review
-process. The results of the test are used to refine the service and pick out any unaddressed issues
-\item[CAV 2018:] All authors are required to use the service, and the results are explicitly used to
-assess reproducibility in the review process.
+\item[CAV 2016:] Offer the service as an optional extra in the testing
+phase, allowing users to demonstrate the reliability of their code
+which could be taken into account in the review process.
+\item[CAV 2017:] All authors must use the reproducibility service, but
+results are not used in the review process. The results of the test
+are used to refine the service and pick out any unaddressed issues
+\item[CAV 2018:] All authors are required to use the service, and the
+results are explicitly used to assess reproducibility in the review
+process.
 \end{description}
 
 An open discussion and understanding of what reproducibility means for
