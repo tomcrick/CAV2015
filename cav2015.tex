@@ -67,7 +67,7 @@ software.
 %%     emphasis on practical verification tools and the algorithms and
 %%     techniques that are needed for their implementation.}}
 %% \end{quotation}
- 
+
 This is not a theory paper or a tool paper, nor an industrial case
 study. The primary aim of this paper is to start a discussion in the
 CAV community about the reproducibility of algorithms, models, tools
@@ -147,14 +147,14 @@ We have a running example based upon the BioModelAnalyzer
 tool, which has been described by the authors over a series of VMCAI
 and CAV
 papers~\cite{cook-et-al:2011,benque-et-al:2012,cook-et-al:2014}.
-BMA is a tool for the development and analysis (simulation, model
+BMA is a tool for the development and analysis (simulation, model
 checking) of a specific class of formal models for biology. The tool
 specifically allows users to test for model \emph{stability}; that
-is, a bespoke algorithm proves that for all initial states a model
-always ends in a single fixpoint. We have chosen this example due to
-our familiarity with the tool, and to highlight historical examples
-where a reproducibility service would have supported both
-toolchain development and algorithm discovery.
+is, a bespoke algorithm proves that for all initial states a model
+always ends in a single fixpoint. We have chosen this example due to
+our familiarity with the tool, and to highlight historical examples
+where a reproducibility service would have supported both
+toolchain development and algorithm discovery.
 
 
 
@@ -168,17 +168,17 @@ roles. It should:
 		without manual intervention from the developer.
 	\item Store and link specific artefacts with their linked publications
 		or other publicly-accessible datasets.
-	\item Allow new benchmarks to be added, by users other than the developer, to 
+	\item Allow new benchmarks to be added, by users other than the developer, to
 		widen the testing and identify potential bugs.
 \end{enumerate}
 
-\subsection{{\em de Novo} build environments} 
- 
+\subsection{{\em de Novo} build environments}
+
 A service such as this must require minimal developer intervention.
 This serves multiple purposes -- through automation for example, the
 service can be enabled to compile new code and test new benchmarks
 trivially. This also forces the developer to make publicly available their
-local workarounds (=hacks). As such, this requires the developer to make
+local workarounds (i.e. hacks). As such, this requires the developer to make
 the project dependencies clearly available, and enables future changes
 in the dependencies (such as a library update) to be tested
 automatically too.
@@ -204,7 +204,7 @@ trivially through the proposed service; such undocumented commands
 would lead to all tests failing until explicitly added to the build
 process.
 
-\subsection{There are two types of people} 
+\subsection{There are two types of people}
 
 The service must fit easily into the developers workflow. As
 noted in Section~\ref{rollout} we expect that there will be some costs
@@ -220,7 +220,7 @@ running tests for every new code commit.
 	\caption{Proposed reproducibility service workflow}
 	\label{schematic}
 \end{figure}
-	
+
 To address these needs we propose that the service should follow the
 workflow given in Figure~\ref{schematic}. Two classes of user are
 defined; developers, who generate code; and modellers, who generate
@@ -249,7 +249,7 @@ available through a web interface for future analysis.
 In contrast to the developer role, a modeller supplies benchmarks for
 a piece of code to test. These do not require that the latest version
 of the code is recompiled, but on submission the models are tested and
-added to the local repository of models for analysis. 
+added to the local repository of models for analysis.
 
 In the case of BMA, throughout the development of the tool, many
 refinements have been made to different implementations. Some of these
@@ -274,7 +274,7 @@ linked to specific code commits. Whilst the developer's role has a
 transparent value (in providing an implementation of an algorithm),
 the value of the modeller may be less immediately clear. The modeller
 submits a broad range of tests which may highlight material flaws
-(= bugs) in the implementation, or the algorithm. More than this
+(i.e. bugs) in the implementation, or the algorithm. More than this
 however, the modeller may generate models which identify weaknesses of
 either an algorithm or an implementation.
 
@@ -287,15 +287,15 @@ of models (``non-trivially stable models'') both can take substantial
 time to search for cycles, and these models could only be proved
 stable using a combination of simulation (to identify the fix-point)
 and LTL queries (to prove that there existed no paths beyond a certain
-length which did not include the fix-point)~\cite{piterman2013}.
+length which did not include the fix-point)~\cite{claessen-et-al:2013}.
 
 \subsection{Algorithm--model axes}
 
 The proposed service would allow both types of test to be included explicitly,
-and models to be routinely added to each algorithm. Models which time-out with 
+and models to be routinely added to each algorithm. Models which time-out with
 one but are successfully proved can be logged and identified for future study.
 The features which define them would be more easily found, and new algorithms
-developed to address the specific features of the model. It could further be 
+developed to address the specific features of the model. It could further be
 used to demonstrate the speed improvement arising from new algorithms.
 
 \subsection{make depend}
@@ -333,7 +333,7 @@ primary aim is to validate recomputation, with performance a secondary
 consideration~\cite{gent:2013}. This is one aspect of this proposal
 that needs further investigating.
 
-\subsection{Run any code in any environment}
+\subsection{Running arbitrary code}
 
 There are clearly security concerns around providing open
 e-infrastructure that pulls, compiles and runs arbitrary
@@ -381,7 +381,7 @@ prize, as well as ranked ordering and listed in conference proceedings
 \item[Artefact evaluation:] artefact evaluation process runs concurrent to the
   standard paper review process.
 \item[Reporting:] traffic lights system (ranked list?) to indicate the level of
-  reproducibility of the submitted artefact. 
+  reproducibility of the submitted artefact.
 \item[Community curation:] over a number of CAV cycles, we would have a
   community curated repository/database of previous artefacts, which
   would provide exemplars, comparisons and emerging best practice.
@@ -411,8 +411,8 @@ publication costs~\cite{vardi-cacm-2014}).
 %easier to catch these issues
 
 % Worked example of how issues could be highlighted and found over time: perhaps
-% another figure? linking code changes to discoveries could be drawn as a timeline. The 
-% proposed output of the hypothetical service could be indicated alongside it, 
+% another figure? linking code changes to discoveries could be drawn as a timeline. The
+% proposed output of the hypothetical service could be indicated alongside it,
 % demonstrating how the service would have supported the work.
 
 
@@ -432,11 +432,11 @@ within the community, and would reduce the disruption for uptake by
 gradually introducing it to researchers.
 
 \begin{description}
-\item[CAV 2016:] Offer the service as an optional extra in the testing phase, allowing users to demonstrate 
+\item[CAV 2016:] Offer the service as an optional extra in the testing phase, allowing users to demonstrate
 the reliability of their code which could be taken into account in the review process.
 \item[CAV 2017:] All authors must use the reproducibility service, but results are not used in the review
 process. The results of the test are used to refine the service and pick out any unaddressed issues
-\item[CAV 2018:] All authors are required to use the service, and the results are explicitly used to 
+\item[CAV 2018:] All authors are required to use the service, and the results are explicitly used to
 assess reproducibility in the review process.
 \end{description}
 
@@ -444,7 +444,8 @@ An open discussion and understanding of what reproducibility means for
 the CAV community is important: we need to explicitly state that this
 is worthwhile and address it, or don't bother doing it at all. We thus
 propose that this should be trialled for CAV in 2016, with an
-explicitly-defined three year schedule for universal adoption.
+explicitly-defined three year schedule for universal adoption by CAV
+2018.
 
 \bibliographystyle{splncs}
 \bibliography{cav2015}
