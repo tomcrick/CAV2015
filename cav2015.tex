@@ -118,15 +118,15 @@ SIGMOD, CGO, SPLASH (OOPSLA) and ECAI, now explicitly acknowledge the
 importance of reproducibility (and repeatability, recomputability and
 the multitude of `Rs' that underpin e-research), as well as promoting
 community-driven reviewing and validation~\cite{fursin+dubach:2014}.
-For many --- like CAV this year --- this takes the form of the author
-providing \emph{artefacts} (an accessible tool for reproducing
-results) to evaluate. Journals such as Nature, PLoS Computational
-Biology and Bioinformatics explicitly require that source code and
-data is made available online under some form of open source
-license. While these initiative are great, they are often optional,
-seem piecemeal, and do little to enable verification or validation of
-scientific results at a later stage. Even within the same field, there
-are different ideas of what defines reproducibility.
+For many --- the first time for CAV this year --- this takes the form
+of the author providing \emph{artefacts} (an accessible tool for
+reproducing results) to evaluate. Journals such as Nature, PLoS
+Computational Biology and Bioinformatics explicitly require that
+source code and data is made available online under some form of open
+source license. While these initiative are great, they are often
+optional, seem piecemeal, and do little to enable verification or
+validation of scientific results at a later stage. Even within the
+same field, there are different ideas of what defines reproducibility.
 
 This paper is thus a ``Call to Action'', inviting CAV practitioners to
 embrace a new methodology for disseminating research. Practically, we
@@ -175,8 +175,8 @@ roles. It should:
 A service such as this must require minimal developer intervention.
 This serves multiple purposes -- through automation for example, the
 service can be enabled to compile new code and test new benchmarks
-trivially. This also forces the developer to make local workarounds or
-hacks publicly viewable. As such, this requires the developer to make
+trivially. This also forces the developer to make publicly available their
+local workarounds (=hacks). As such, this requires the developer to make
 the project dependencies clearly available, and enables future changes
 in the dependencies (such as a library update) to be tested
 automatically too.
@@ -272,7 +272,7 @@ linked to specific code commits. Whilst the developer's role has a
 transparent value (in providing an implementation of an algorithm),
 the value of the modeller may be less immediately clear. The modeller
 submits a broad range of tests which may highlight material flaws
-(i.e. bugs) in the implementation, or the algorithm. More than this
+(= bugs) in the implementation, or the algorithm. More than this
 however, the modeller may generate models which identify weaknesses of
 either an algorithm or an implementation.
 
